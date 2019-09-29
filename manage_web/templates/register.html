@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>书店管理系统 | 注册</title>
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='font-awesome/css/font-awesome.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/animate.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/plugins/iCheck/custom.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/plugins/sweetalert/sweetalert.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', filename='js/jquery-2.1.1.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/sweetalert/sweetalert.min.js') }}"></script>
+</head>
+
+<body class="gray-bg">
+
+<div class="middle-box text-center loginscreen   animated fadeInDown">
+    <div>
+        <div>
+            <br><br><br><br><br><br>
+            <p class="logo-name">书店管理系统</p>
+        </div>
+        <h3>欢迎进入书店管理系统</h3>
+        <form class="m-t" role="form" action="login.html">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="用户名" required="">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="密码" required="">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="确认密码" required="">
+            </div>
+            <button type="button" class="btn btn-primary block full-width m-b" id="regisBtn">注册</button>
+            <p class="text-muted text-center">
+                <small>已有账户?</small>
+            </p>
+            <a class="btn btn-sm btn-white btn-block" href="{{ url_for('login_blueprint.login') }}">去登陆</a>
+        </form>
+        <p class="m-t">
+            <small>@小亮</small>
+        </p>
+    </div>
+</div>
+<script>
+    $(function () {
+        //注册校验
+        $("#regisBtn").click(function () {
+            var i1 = $("input:eq(0)").val()
+            var i2 = $("input:eq(1)").val()
+            var i3 = $("input:eq(2)").val()
+            if (i1.trim() != '') {
+                if (i2.trim() != '') {
+                    if (i3 == i2) {
+                        $.ajax({
+                            url: "/register/",
+                            type: "POST",
+                            dataType: "json",
+                            data: {"uname": i1, "pwd": i2},
+                            success: function (data) {
+                                if (data['info'] == 'ok') {
+                                    swal({
+                                        title: "注册成功",
+                                        text: "是否返回登陆页面",
+                                        showCancelButton: true,
+                                        confirmButtonColor: "#DD6B55",
+                                        confirmButtonText: "返回",
+                                        closeOnConfirm: false
+                                    }, function () {
+                                        window.location.href = '/login/'
+                                    });
+                                } else {
+                                    swal({
+                                        title: "提示",
+                                        text: data['info']
+                                    });
+                                }
+                            },
+                            error: function (data) {
+                                swal({
+                                    title: "提示",
+                                    text: "服务器繁忙，请稍后再试"
+                                });
+                            }
+                        });
+                    } else {
+                        swal({
+                            title: "提示",
+                            text: "两次密码输入不一致"
+                        });
+                    }
+                } else {
+                    swal({
+                        title: "提示",
+                        text: "密码不能为空"
+                    });
+                }
+            } else {
+                swal({
+                    title: "提示",
+                    text: "用户名不能为空"
+                });
+            }
+        });
+    })
+</script>
+</body>
+
+</html>

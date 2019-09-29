@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>书店管理系统</title>
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='font-awesome/css/font-awesome.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/plugins/toastr/toastr.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/animate.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/plugins/sweetalert/sweetalert.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/plugins/dropzone/basic.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/plugins/dropzone/dropzone.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/plugins/blueimp/css/blueimp-gallery.min.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', filename='js/jquery-2.1.1.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/inspinia.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/pace/pace.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/toastr/toastr.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/sweetalert/sweetalert.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/dropzone/dropzone.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/blueimp/jquery.blueimp-gallery.min.js') }}"></script>
+</head>
+
+<body>
+<div id="wrapper">
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element"> <span>
+                            <img alt="未上传" style="width: 30%;" class="img-circle" id="img1"/>
+                             </span>
+                        <a data-toggle="dropdown" class="dropdown-toggle" aria-expanded="false">
+                            <span class="clear"> <span class="block m-t-xs"> <strong id="username"
+                                                                                     class="font-bold">{{ user.name }}</strong>
+                             </span> <span class="text-muted text-xs block">更多操作 <b class="caret"></b></span> </span>
+                        </a>
+                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <li><a onclick="changePage('profile')">用户资料</a></li>
+                            <li class="divider"></li>
+                            <li><a id="lock_screen" href="{{ url_for('login_blueprint.lock_srceen_view') }}">锁屏</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{{ url_for('login_blueprint.login_out_view') }}">退出系统</a></li>
+                        </ul>
+                    </div>
+                    <div class="logo-element">
+                        BOOK
+                    </div>
+                </li>
+                <li class="active">
+                    <a> <i class="fa fa-flask"></i> <span class="nav-label">书店简介</span> <span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a onclick="changePage('0_1')">书店书籍</a></li>
+                    </ul>
+                </li>
+                {% if user and user.role_id > 1 %}
+                    <li>
+                        <a> <i class="fa fa-th-large"></i><span class="nav-label">商品操作</span><span
+                                class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a onclick="changePage('1_1')">上架新书</a></li>
+                            <li><a onclick="changePage('1_2')">删除旧书</a></li>
+                            <li><a onclick="changePage('1_3')">修改书籍信息</a></li>
+                            <li><a onclick="changePage('1_4')">上传轮播图片</a></li>
+                            <li><a onclick="changePage('1_5')">设置书籍分类</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a> <i class="fa fa-bar-chart-o"></i><span class="nav-label">数据管理</span><span
+                                class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a onclick="changePage('2_1')">销售详情</a></li>
+                            <li><a onclick="changePage('2_2')">查看营业额</a></li>
+                            <li><a onclick="changePage('2_3')">数据分析</a></li>
+                        </ul>
+                    </li>
+                {% endif %}
+                {% if user and user.role_id > 2 %}
+                    <li>
+                        <a> <i class="fa fa-diamond"></i><span class="nav-label">权限操作</span><span
+                                class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a onclick="changePage('3_1')">修改用户权限</a></li>
+                            <li><a onclick="changePage('3_2')">查看网站日志</a></li>
+
+                        </ul>
+                    </li>
+                {% endif %}
+            </ul>
+
+        </div>
+    </nav>
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary "><i class="fa fa-bars"></i> </a>
+                </div>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li>
+                        <span class="m-r-sm text-muted welcome-message">欢迎来到ONE MORE TIME酒店管理系统&emsp;登陆级别：{{ role.role_name }}</span>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('login_blueprint.login_out_view') }}">
+                            <i class="fa fa-sign-out"></i> 退出登陆
+                        </a>
+                    </li>
+                </ul>
+
+            </nav>
+        </div>
+        <div id="pageRow">
+
+        </div>
+
+    </div>
+</div>
+</div>
+<script>
+    $(document).ready(function () {
+        Dropzone.options.myAwesomeDropzone = {
+
+            autoProcessQueue: false,
+            uploadMultiple: true,
+            parallelUploads: 100,
+            maxFiles: 100,
+
+            // Dropzone settings
+            init: function () {
+                var myDropzone = this;
+
+                this.element.querySelector("button[type=submit]").addEventListener("click", function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    myDropzone.processQueue();
+                });
+                this.on("sendingmultiple", function () {
+                });
+                this.on("successmultiple", function (files, response) {
+                });
+                this.on("errormultiple", function (files, response) {
+                });
+            }
+
+        }
+        setTimeout(function () {
+            toastr.options = {
+                closeButton: true,
+                progressBar: true,
+                showMethod: 'slideDown',
+                timeOut: 4000
+            };
+            toastr.success('ENJOY YOUR TIME', '欢迎来到书店管理系统');
+
+        }, 1300);
+        var data1 = [
+            [0, 4], [1, 8], [2, 5], [3, 10], [4, 4], [5, 16], [6, 5], [7, 11], [8, 6], [9, 11], [10, 30], [11, 10], [12, 13], [13, 4], [14, 3], [15, 3], [16, 6]
+        ];
+        var data2 = [
+            [0, 1], [1, 0], [2, 2], [3, 0], [4, 1], [5, 3], [6, 1], [7, 5], [8, 2], [9, 3], [10, 2], [11, 1], [12, 0], [13, 2], [14, 8], [15, 0], [16, 0]
+        ];
+        $("#flot-dashboard-chart").length && $.plot($("#flot-dashboard-chart"), [
+                data1, data2
+            ],
+            {
+                series: {
+                    lines: {
+                        show: false,
+                        fill: true
+                    },
+                    splines: {
+                        show: true,
+                        tension: 0.4,
+                        lineWidth: 1,
+                        fill: 0.4
+                    },
+                    points: {
+                        radius: 0,
+                        show: true
+                    },
+                    shadowSize: 2
+                },
+                grid: {
+                    hoverable: true,
+                    clickable: true,
+                    tickColor: "#d5d5d5",
+                    borderWidth: 1,
+                    color: '#d5d5d5'
+                },
+                colors: ["#1ab394", "#1C84C6"],
+                xaxis: {},
+                yaxis: {
+                    ticks: 4
+                },
+                tooltip: false
+            }
+        );
+        //请求图片渲染
+        changePage('{{ page_id }}');
+        load_img('img1');
+    });
+
+    function changePage(pageId) {
+        $.ajax({
+            url: "/sub_html/",
+            type: "POST",
+            dataType: "json",
+            data: {"id": pageId},
+            success: function (data) {
+                $("#pageRow").text("")//清空文本
+                $("#pageRow").append(data["pageInfo"])
+            },
+            error: function () {
+                $("#pageRow").text("")//清空文本
+                swal({
+                    title: "提示",
+                    text: "服务器繁忙，请稍后再试"
+                });
+            }
+        });
+    }
+
+    function load_img(id) {
+        $.ajax({
+            url: "/show_img/",
+            type: "POST",
+            dataType: "json",
+            success: function (data) {
+                $("#" + id).attr('src', data['info']);
+            },
+            error: function () {
+                $("#pageRow").text("")//清空文本
+                swal({
+                    title: "提示",
+                    text: "服务器繁忙，请稍后再试"
+                });
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

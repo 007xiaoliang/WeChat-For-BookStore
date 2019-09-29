@@ -1,0 +1,224 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>更新书籍</h2>
+        <ol class="breadcrumb">
+            <li class="active">
+                <strong>更新已有书籍信息</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox-content">
+                <div class="table-responsive">
+                    <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="dataTables_length" id="DataTables_Table_0_length"><label>每页显示 <select
+                                name="DataTables_Table_0_length" aria-controls="DataTables_Table_0"
+                                class="form-control input-sm">
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select> 记录</label>&emsp;&emsp;
+                            <label><input type="text" class="form-control" placeholder="输入书名精确查询"
+                                          aria-controls="DataTables_Table_0"></label>
+                            <button type="button" class="btn btn-w-m btn-success" onclick="click_btn()">查询
+                            </button>
+                        </div>
+                        <table class="table table-striped table-bordered table-hover dataTables-example dataTable"
+                               id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info" role="grid">
+                            <thead>
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1" aria-sort="ascending"
+                                    aria-label="Rendering engine: activate to sort column descending">序号
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1" aria-label="Browser: activate to sort column ascending">书名
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1" aria-label="Browser: activate to sort column ascending">作者
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1" aria-label="Browser: activate to sort column ascending">出版社
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1" aria-label="Browser: activate to sort column ascending">出版时间
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 30%">书籍简介
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1" aria-label="Browser: activate to sort column ascending">价格
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1" aria-label="Browser: activate to sort column ascending">类型
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1" aria-label="Browser: activate to sort column ascending">更多
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody></tbody>
+                            <tfoot>
+                            <tr>
+                                <th rowspan="1" colspan="1">序号</th>
+                                <th rowspan="1" colspan="1">书名</th>
+                                <th rowspan="1" colspan="1">作者</th>
+                                <th rowspan="1" colspan="1">出版社</th>
+                                <th rowspan="1" colspan="1">出版时间</th>
+                                <th rowspan="1" colspan="1">书籍简介</th>
+                                <th rowspan="1" colspan="1">价格</th>
+                                <th rowspan="1" colspan="1">类型</th>
+                                <th rowspan="1" colspan="1">更多</th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                        <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
+                            <ul class="pagination" id="append_ul">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div id="blueimp-gallery" class="blueimp-gallery" style="width: 80%; height:80%; left: 10%;top: 10%;">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+</div>
+<script>
+    //加载注册用户信息
+    $(function () {
+        $("tbody").text("")
+        load_info(1);
+    })
+
+    function load_info1(id) {
+        $("input:eq(0)").val("")
+        load_info(id);
+    }
+
+    function load_info(id) {
+        const book_name = $("input:eq(0)").val()
+        $.ajax({
+            url: "/load_book/",
+            type: "POST",
+            dataType: "json",
+            data: {"entries": $("select:eq(0)").val(), "book_name": book_name, "page_now": id},
+            success: function (data) {
+                if (data['info'] == 'ok') {
+                    $("tbody").text("")
+                    for (i = 0; i < data['return_info'].length; i++) {
+                        info1 = data['return_info'][i]
+                        if (i % 2 == 0) {
+                            clazz = 'gradeA odd'
+                        } else {
+                            clazz = 'gradeA even'
+                        }
+                        str_append = '<tr class="' + clazz + '" role="row">\n' +
+                            '                                <td>' + (i + 1) + '</td>\n' +
+                            '                                <td>' + info1["book_name"] + '</td>\n' +
+                            '                                <td>' + info1["book_writer"] + '</td>\n' +
+                            '                                <td>' + info1["book_press"] + '</td>\n' +
+                            '                                <td>' + info1["book_press_time"] + '</td>\n' +
+                            '                                <td>' + info1["book_induction"] + '</td>\n' +
+                            '                                <td>' + info1["book_price"] + '</td>\n' +
+                            '                                <td>' + info1["book_type1"] + " " + info1["book_type2"] + '</td>\n' +
+                            '                                <td><a onclick="update_book(this);">更新</a></td>\n' +
+                            '                            </tr>'
+                        $("tbody").append(str_append)
+                    }
+                    //渲染分页
+                    $("#append_ul").text("")
+                    const start_page = data['page_info']['start_page']
+                    const end_page = data['page_info']['end_page']
+                    const page_total = data['page_info']['page_total']
+                    const page_now = data['page_info']['page_now']
+                    $("#append_ul").append('<li class="paginate_button previous"><span aria-controls="DataTables_Table_0">共' + page_total + '页</span></li>')
+                    if (page_now == 1) {
+                        $("#append_ul").append('<li class="paginate_button previous disabled"><a aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0">上一页</a></li>')
+                    } else {
+                        $("#append_ul").append('<li class="paginate_button previous"><a onclick="load_info1(' + (page_now - 1) + ');" aria-controls="DataTables_Table_0" data-dt-idx="7" tabindex="0">上一页</a>')
+                    }
+                    for (i = start_page; i <= end_page; i++) {
+                        if (i == page_now) {
+                            $("#append_ul").append('<li class="paginate_button active"><a aria-controls="DataTables_Table_0" data-dt-idx="' + i + '" tabindex="0">' + i + '</a></li>')
+                        } else {
+                            $("#append_ul").append('<li class="paginate_button "><a onclick="load_info1(' + i + ');" aria-controls="DataTables_Table_0" data-dt-idx="' + i + '" tabindex="0">' + i + '</a></li>')
+                        }
+                    }
+                    if (page_now == page_total) {
+                        $("#append_ul").append('<li class="paginate_button previous disabled"><a aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0">下一页</a></li>')
+                    } else {
+                        $("#append_ul").append('<li class="paginate_button previous"><a onclick="load_info1(' + (page_now + 1) + ');"aria-controls="DataTables_Table_0" data-dt-idx="7"  tabindex="0">下一页</a>')
+                    }
+                } else {
+                    swal({
+                        title: "警告",
+                        text: "书名不存在"
+                    });
+                }
+            },
+            error: function (data) {
+                swal({
+                    title: "提示",
+                    text: "服务器繁忙，请稍后再试"
+                });
+            }
+        });
+    }
+
+    function click_btn() {
+        if ($("input:eq(0)").val() != '') {
+            load_info(1);
+        } else {
+            swal({
+                title: "确定查询",
+                text: "不输入用户名默认查询全部，继续吗？",
+                showCancelButton: true,
+                confirmButtonColor: "#dd2b30",
+                confirmButtonText: "继续",
+                closeOnConfirm: true
+            }, function () {
+                load_info(1);
+            })
+        }
+    }
+
+    function update_book(obj) {
+        obj=$(obj)
+        const book_name=obj.parent().parent().children("td").eq(1).text()
+        const book_writer=obj.parent().parent().children("td").eq(2).text()
+        const book_press=obj.parent().parent().children("td").eq(3).text()
+        change_update_page('1_3_1',book_name,book_writer,book_press)
+    }
+    function change_update_page(pageId,book_name,book_writer,book_press) {
+        $.ajax({
+            url: "/sub_html/",
+            type: "POST",
+            dataType: "json",
+            data: {"id": pageId,"book_name": book_name,"book_writer": book_writer,"book_press": book_press},
+            success: function (data) {
+                $("#pageRow").text("")//清空文本
+                $("#pageRow").append(data["pageInfo"])
+            },
+            error: function () {
+                $("#pageRow").text("")//清空文本
+                swal({
+                    title: "提示",
+                    text: "服务器繁忙，请稍后再试"
+                });
+            }
+        });
+    }
+</script>

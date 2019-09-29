@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>书店管理系统 | 屏幕锁定</title>
+
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='font-awesome/css/font-awesome.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/animate.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/plugins/sweetalert/sweetalert.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', filename='js/jquery-2.1.1.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/sweetalert/sweetalert.min.js') }}"></script>
+
+</head>
+
+<body class="gray-bg">
+
+<div class="lock-word animated fadeInDown">
+    {#    <span class="first-word">屏幕</span><span>锁定</span>#}
+</div>
+<div class="middle-box text-center lockscreen animated fadeInDown">
+    <div>
+        <div class="m-b-md">
+            <img alt="未上传" style="width: 100%" class="img-circle circle-border" src="{{ server }}{{ user.img_id }}">
+        </div>
+        <h3>{{ user.name }}</h3>
+        <p>屏幕已锁定，您需要重新输入登陆密码才能进入系统</p>
+        <form class="m-t" role="form">
+            <div class="form-group">
+                <input type="hidden" class="form-control" required="" value="{{ page_id }}">
+                <input type="password" class="form-control" placeholder="******" required="">
+            </div>
+            <button type="button" class="btn btn-primary block full-width" onclick="unlocked();">解锁</button>
+        </form>
+    </div>
+</div>
+</body>
+
+</html>
+<script>
+    function unlocked() {
+        re_pwd = $('input:eq(1)').val()
+        if (re_pwd == '') {
+            swal({
+                title: "提示",
+                text: "密码不能为空"
+            });
+        } else {
+            $.ajax({
+                url: "/login/",
+                type: "POST",
+                data: {"uname": $('h3').text(), "pwd": re_pwd,"page_id":$('input:eq(0)').val()},
+                dataType: "json",
+                success: function (data) {
+                    if (data['info'] != 'ok') {
+                        swal({
+                            title: "提示",
+                            text: "密码错误"
+                        });
+                    }else{
+                        window.location.href = '/index/'
+                    }
+                },
+                error: function (data) {
+                    swal({
+                        title: "提示",
+                        text: "服务器繁忙，请稍后再试"
+                    });
+                }
+            });
+        }
+
+
+    }
+</script>

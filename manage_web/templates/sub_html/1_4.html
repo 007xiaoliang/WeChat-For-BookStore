@@ -1,0 +1,158 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>轮播图片</h2>
+        <ol class="breadcrumb">
+            <li class="active">
+                <strong>添加轮播图片到数据库</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>请选择图片(最多限定5张)点击<code><i class="fa fa-times"></i></code>可删除，刷新页面可恢复</h5>
+                </div>
+                <div class="ibox-content">
+                    <form id="form1" class="form-horizontal" enctype="multipart/form-data">
+                        <div class="form-group" id="i1"><label class="col-sm-2 control-label">图片1</label>
+                            <div class="col-sm-5"><input type="file" class="form-control" accept=".jpg,.jpeg,.gif,.png"
+                                                         id="book_image1" name="book_image1" onchange="setImage(1);">
+                            </div>
+                            <label class="col-sm-1 control-label"><i class="fa fa-times"
+                                                                     onclick="delete_div(1)"></i></label>
+                        </div>
+                        <div class="form-group" id="i11"><label class="col-sm-2 control-label"></label>
+                            <div class="col-sm-5"><img id="book_img1" style="width: 30%"></div>
+                        </div>
+                        <div class="form-group" id="i2"><label class="col-sm-2 control-label">图片2</label>
+                            <div class="col-sm-5"><input type="file" class="form-control" accept=".jpg,.jpeg,.gif,.png"
+                                                         id="book_image2" name="book_image2" onchange="setImage(2);">
+                            </div>
+                            <label class="col-sm-1 control-label"><i class="fa fa-times"
+                                                                     onclick="delete_div(2)"></i></label>
+                        </div>
+                        <div class="form-group" id="i22"><label class="col-sm-2 control-label"></label>
+                            <div class="col-sm-5"><img id="book_img2" style="width: 30%"></div>
+                        </div>
+                        <div class="form-group" id="i3"><label class="col-sm-2 control-label">图片3</label>
+                            <div class="col-sm-5"><input type="file" class="form-control" accept=".jpg,.jpeg,.gif,.png"
+                                                         id="book_image3" name="book_image3" onchange="setImage(3);">
+                            </div>
+                            <label class="col-sm-1 control-label"><i class="fa fa-times"
+                                                                     onclick="delete_div(3)"></i></label>
+                        </div>
+                        <div class="form-group" id="i33"><label class="col-sm-2 control-label"></label>
+                            <div class="col-sm-5"><img id="book_img3" style="width: 30%"></div>
+                        </div>
+                        <div class="form-group" id="i4"><label class="col-sm-2 control-label">图片4</label>
+                            <div class="col-sm-5"><input type="file" class="form-control" accept=".jpg,.jpeg,.gif,.png"
+                                                         id="book_image4" name="book_image4" onchange="setImage(4);">
+                            </div>
+                            <label class="col-sm-1 control-label"><i class="fa fa-times"
+                                                                     onclick="delete_div(4)"></i></label>
+                        </div>
+                        <div class="form-group" id="i44"><label class="col-sm-2 control-label"></label>
+                            <div class="col-sm-5"><img id="book_img4" style="width: 30%"></div>
+                        </div>
+                        <div class="form-group" id="i5"><label class="col-sm-2 control-label">图片5</label>
+                            <div class="col-sm-5"><input type="file" class="form-control" accept=".jpg,.jpeg,.gif,.png"
+                                                         id="book_image5" name="book_image5" onchange="setImage(5);">
+                            </div>
+                            <label class="col-sm-1 control-label"><i class="fa fa-times"
+                                                                     onclick="delete_div(5)"></i></label>
+                        </div>
+                        <div class="form-group" id="i55"><label class="col-sm-2 control-label"></label>
+                            <div class="col-sm-5"><img id="book_img5" style="width: 30%"></div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-primary" type="button" onclick="update_lunbo()">提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        //加载轮播图图片
+        load_lunbo();
+    })
+    function update_lunbo() {
+        swal({
+            title: "注意",
+            text: "提交图片为当前显示的图片，确定吗",
+            showCancelButton: true,
+            confirmButtonColor: "#65dd19",
+            confirmButtonText: "确定",
+            closeOnConfirm: false
+        }, function () {
+            var formData = new FormData($('#form1')[0]);
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "/update_lunbo/",
+                data: formData,
+                processData: false,//用于对data参数进行序列化处理 这里必须false
+                contentType: false,
+                success: function (data) {
+                    if (data["info"] == "ok") {
+                        swal({
+                            title: "提示",
+                            text: "操作成功"
+                        });
+                    }
+                },
+                error: function () {
+                    swal({
+                        title: "提示",
+                        text: "服务器繁忙，请稍后再试"
+                    });
+                }
+            });
+        })
+    }
+    //下面用于图片上传预览功能
+    function setImage(id) {
+        $("#book_img" + id).attr("src", window.URL.createObjectURL($("#book_image" + id).prop("files")[0]))
+    }
+
+    function delete_div(id) {
+        $("#i" + id).remove()
+        $("#i" + id + id).remove()
+    }
+
+    function load_lunbo() {
+        $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "/load_lunbo/",
+                success: function (data) {
+                    if (data["info"] == "ok") {
+                        const image_name=JSON.parse(data["image_name"])
+                        const serverIP=data["addr"]
+                        if(image_name!=null){
+                            //图片回显到页面"
+                            if(image_name["book_image1"])$("#book_img1").attr("src",serverIP+image_name["book_image1"])
+                            if(image_name["book_image2"])$("#book_img2").attr("src",serverIP+image_name["book_image2"])
+                            if(image_name["book_image3"])$("#book_img3").attr("src",serverIP+image_name["book_image3"])
+                            if(image_name["book_image4"])$("#book_img4").attr("src",serverIP+image_name["book_image4"])
+                            if(image_name["book_image5"])$("#book_img5").attr("src",serverIP+image_name["book_image5"])
+                        }
+                    }
+                },
+                error: function () {
+                    swal({
+                        title: "提示",
+                        text: "服务器繁忙，请稍后再试"
+                    });
+                }
+            });
+    }
+</script>

@@ -1,0 +1,240 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>个人信息</h2>
+            <ol class="breadcrumb">
+                <li id="li1"><strong>查看</strong></li>
+                <li id="li2">
+                    <small>修改</small>
+                </li>
+                <li id="li3">
+                    <small>上传|修改头像</small>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-7">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-sm-6 b-r">
+                            <form role="form">
+                                <div class="form-group"><label>用户名</label> <input type="text" readOnly="true"
+                                                                                  class="form-control">
+                                </div>
+                                <div class="form-group"><label>原密码(原密码输入正确后光标离开输入框可出现修改密码框)</label> <input
+                                        type="password" readOnly="true"
+                                        placeholder="******"
+                                        class="form-control"></div>
+                                <div class="form-group" style="display: none" id="new_pwd"><label>输入新密码</label> <input
+                                        type="password" class="form-control"></div>
+                                <div class="form-group" style="display: none" id="re_pwd"><label>再次输入</label> <input
+                                        type="password" class="form-control"></div>
+                                <div>
+                                    <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="button"
+                                            onclick="fun_Btn('update');">
+                                        <strong>修改</strong></button>
+                                    <button class="btn btn-sm btn-primary m-t-n-xs" type="button"
+                                            onclick="fun_Btn('undo');" style="display: none">
+                                        <strong>不修改密码</strong></button>
+                                    <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="button"
+                                            onclick="fun_Btn('submit');" style="display: none">
+                                        <strong>提交</strong></button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-sm-6"><h4>个人头像</h4>&emsp;<button
+                                class="btn btn-sm btn-primary pull-right m-t-n-xs" type="button"
+                                onclick="fun_Btn('img');"><strong>上传或修改头像</strong></button>
+                            <hr>
+                            <div class="dropdown profile-element" id="showImg"><span><img width="100%" alt="未上传"
+                                                                                          class="img-rounded"
+                                                                                          id="img2"/></span>
+                            </div>
+                            <div id="showUpload" style="display: none">
+                                <br>
+                                <form id="uploadForm" enctype="multipart/form-data"><label>选择文件</label>
+                                    <button class="btn btn-sm btn-warning m-t-n-xs" type="button"
+                                            onclick="fun_Btn('file');"><strong>浏览</strong></button>
+                                    <input id="file" type="file" name="photo" accept=".jpg,.jpeg,.gif,.png"
+                                           style="display: none"/>
+                                </form>
+                                <br><br>
+                                <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="button"
+                                        onclick="fun_Btn('upload');"><strong>提交</strong></button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    $(function () {
+        username = $("#username").text()
+        $("input:eq(0)").attr('placeholder', username);
+        load_img('img2');
+        //密码框改变触发事件，判断密码是否正确
+        $("input:eq(1)").change(function () {
+            $.ajax({
+                url: "/profile_validatepwd/",
+                type: "POST",
+                dataType: "json",
+                data: {"pwd": $("input:eq(1)").val(), "user": username},
+                success: function (data) {
+                    if (data['info'] == 'ok') {
+                        swal({
+                            title: "提示",
+                            text: "密码验证通过，是否要修改密码？",
+                            showCancelButton: true,
+                            confirmButtonColor: "#29dd6c",
+                            confirmButtonText: "修改",
+                            closeOnConfirm: true
+                        }, function () {
+                            $('input:eq(1)').attr("readonly", "readonly")
+                            $("button:eq(1)").show()
+                            $("#new_pwd").show()
+                            $("#re_pwd").show()
+                        });
+                    } else {
+                        swal({
+                            title: "警告",
+                            text: "输入密码错误"
+                        });
+                    }
+                },
+                error: function (data) {
+                    swal({
+                        title: "提示",
+                        text: "服务器繁忙，请稍后再试"
+                    });
+                }
+            });
+        })
+    })
+
+    function fun_Btn(id) {
+        if (id == "update") {
+            $("#li1").html("<small>查看</small>")
+            $("#li2").html("<strong>修改</strong>")
+            $("#li3").html("<small>上传|修改头像</small>")
+            $("input:eq(0)").removeAttr("readonly")
+            $("input:eq(1)").removeAttr("readonly")
+            $("button:eq(0)").hide()
+            $("button:eq(2)").show()
+        } else if (id == "undo") {
+            $("button:eq(1)").hide()
+            $("input:eq(1)").removeAttr("readonly")
+            $("#new_pwd").hide()
+            $("#re_pwd").hide()
+        } else if (id == "submit") {
+            user_name = $('input:eq(0)').val()
+            new_pwd = $('input:eq(2)').val()
+            re_pwd = $('input:eq(3)').val()
+            //验证两次输入密码是否一致
+            if ($('input:eq(1)').attr("readonly") == 'readonly') {//说明需要修改密码
+                if (new_pwd != '' && re_pwd != '') {
+                    if (new_pwd == re_pwd) {
+                        updateInfo(user_name, new_pwd, username)
+                    } else {
+                        swal({
+                            title: "提示",
+                            text: "两次密码输入不一致"
+                        });
+                    }
+                } else {
+                    swal({
+                        title: "提示",
+                        text: "密码不能为空"
+                    });
+                }
+            } else {
+                if (user_name == '') {
+                    swal({
+                        title: "提示",
+                        text: "没有做出任何修改"
+                    });
+                } else {
+                    updateInfo(user_name, new_pwd, username)
+                }
+            }
+        } else if (id == 'img') {
+            if ($("#showUpload").css("display") == "none") {
+                $("#li1").html("<small>查看</small>")
+                $("#li2").html("<small>修改</samll>")
+                $("#li3").html("<strong>上传|修改头像</strong>")
+                $("#showUpload").show();
+                $("#showImg").hide();
+            } else {
+                $("#li1").html("<strong>查看</strong>")
+                $("#li2").html("<small>修改</samll>")
+                $("#li3").html("<small>上传|修改头像</small>")
+                $("#showImg").show();
+                $("#showUpload").hide();
+            }
+        } else if (id == 'file') {
+            $("#file").click()
+        } else if (id == 'upload') {
+            //上传头像
+            var formData = new FormData($('#uploadForm')[0]);
+            $.ajax({
+                type: 'post',
+                url: "/file_upload/",
+                data: formData,
+                cache: false,
+                processData: false,
+                contentType: false,
+            }).success(function (data) {
+                if (data['info'] == 'ok') {
+                    swal({
+                        title: "提示",
+                        text: "头像上传成功，是否刷新页面？",
+                        type: "success",
+                        showCancelButton: true,
+                        confirmButtonColor: "#0cdd61",
+                        confirmButtonText: "刷新",
+                        closeOnConfirm: false
+                    }, function () {
+                        window.location.reload()
+                    });
+                }
+            }).error(function () {
+                swal({
+                    title: "警告",
+                    text: "上传失败"
+                });
+            });
+        }
+    }
+
+    function updateInfo(user_name, new_pwd, username) {
+        $.ajax({
+            url: "/profile_updateinfo/",
+            type: "POST",
+            dataType: "json",
+            data: {"user_name": user_name, "new_pwd": new_pwd, "username": username},
+            success: function (data) {
+                if (data['info'] == 'ok') {
+                    swal({
+                        title: "提示",
+                        text: "修改信息成功"
+                    });
+                }
+            },
+            error: function (data) {
+                swal({
+                    title: "提示",
+                    text: "服务器繁忙，请稍后再试"
+                });
+            }
+        });
+    }
+</script>

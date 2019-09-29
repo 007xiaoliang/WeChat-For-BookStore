@@ -1,0 +1,324 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>更新书籍</h2>
+        <ol class="breadcrumb">
+            <li class="active">
+                <strong>更改所选书籍详细信息</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>请修改要更新的内容</h5>
+                </div>
+                <div class="ibox-content">
+                    <form id="form1" class="form-horizontal" enctype="multipart/form-data">
+                        <div class="form-group"><label class="col-sm-2 control-label">书名</label>
+                            <div class="col-sm-10"><input type="text" class="form-control" name="book_name"></div>
+                        </div>
+                        <div class="form-group"><label class="col-sm-2 control-label">作者</label>
+                            <div class="col-sm-10"><input type="text" class="form-control" name="book_writer"></div>
+                        </div>
+                        <div class="form-group"><label class="col-sm-2 control-label">出版社</label>
+                            <div class="col-sm-10"><input type="text" class="form-control" name="book_press"></div>
+                        </div>
+                        <div class="form-group"><label class="col-sm-2 control-label">出版时间</label>
+                            <div class="col-sm-10"><input type="date" class="form-control" name="book_press_time"></div>
+                        </div>
+                        <div class="form-group"><label class="col-sm-2 control-label">书籍简介</label>
+                            <div class="col-sm-10"><input type="text" class="form-control" name="book_induction"
+                                                          placeholder="关于书籍的一些简介描述">
+                            </div>
+                        </div>
+                        <div class="form-group"><label class="col-sm-2 control-label">价格</label>
+                            <div class="col-sm-10"><input type="text" class="form-control" name="book_price"
+                                                          placeholder="请输入数字，单位为￥"></div>
+                        </div>
+                        <div class="form-group"><label class="col-sm-2 control-label">一级类名</label>
+                            <div class="col-sm-10">
+                                <select class="form-control m-b" name="book_type1">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group"><label class="col-sm-2 control-label">二级类名</label>
+                            <div class="col-sm-10">
+                                <select class="form-control m-b" name="book_type2">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group"><label class="col-sm-2 control-label"></label>
+                            <div class="col-sm-10"><img id="book_img" style="width: 30%"></div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-white" type="reset">重置</button>
+                                <button class="btn btn-primary" type="button" onclick="update()">修改</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>修改上传图片</h5>
+                </div>
+                <div class="ibox-content">
+                    <form id="form2" class="form-horizontal" enctype="multipart/form-data">
+                        <input type="hidden" id="hidden1" name="book_name">
+                        <input type="hidden" id="hidden2" name="book_writer">
+                        <input type="hidden" id="hidden3" name="book_press">
+                        <div class="form-group" id="i1"><label class="col-sm-2 control-label">图片1</label>
+                            <div class="col-sm-5"><input type="file" class="form-control" accept=".jpg,.jpeg,.gif,.png"
+                                                         id="book_image1" name="book_image1" onchange="setImage(1);">
+                            </div>
+                            <label class="col-sm-1 control-label"><i class="fa fa-times"
+                                                                     onclick="delete_div(1)"></i></label>
+                        </div>
+                        <div class="form-group" id="i11"><label class="col-sm-2 control-label"></label>
+                            <div class="col-sm-5"><img id="book_img1" style="width: 30%"></div>
+                        </div>
+                        <div class="form-group" id="i2"><label class="col-sm-2 control-label">图片2</label>
+                            <div class="col-sm-5"><input type="file" class="form-control" accept=".jpg,.jpeg,.gif,.png"
+                                                         id="book_image2" name="book_image2" onchange="setImage(2);">
+                            </div>
+                            <label class="col-sm-1 control-label"><i class="fa fa-times"
+                                                                     onclick="delete_div(2)"></i></label>
+                        </div>
+                        <div class="form-group" id="i22"><label class="col-sm-2 control-label"></label>
+                            <div class="col-sm-5"><img id="book_img2" style="width: 30%"></div>
+                        </div>
+                        <div class="form-group" id="i3"><label class="col-sm-2 control-label">图片3</label>
+                            <div class="col-sm-5"><input type="file" class="form-control" accept=".jpg,.jpeg,.gif,.png"
+                                                         id="book_image3" name="book_image3" onchange="setImage(3);">
+                            </div>
+                            <label class="col-sm-1 control-label"><i class="fa fa-times"
+                                                                     onclick="delete_div(3)"></i></label>
+                        </div>
+                        <div class="form-group" id="i33"><label class="col-sm-2 control-label"></label>
+                            <div class="col-sm-5"><img id="book_img3" style="width: 30%"></div>
+                        </div>
+                        <div class="form-group" id="i4"><label class="col-sm-2 control-label">图片4</label>
+                            <div class="col-sm-5"><input type="file" class="form-control" accept=".jpg,.jpeg,.gif,.png"
+                                                         id="book_image4" name="book_image4" onchange="setImage(4);">
+                            </div>
+                            <label class="col-sm-1 control-label"><i class="fa fa-times"
+                                                                     onclick="delete_div(4)"></i></label>
+                        </div>
+                        <div class="form-group" id="i44"><label class="col-sm-2 control-label"></label>
+                            <div class="col-sm-5"><img id="book_img4" style="width: 30%"></div>
+                        </div>
+                        <div class="form-group" id="i5"><label class="col-sm-2 control-label">图片5</label>
+                            <div class="col-sm-5"><input type="file" class="form-control" accept=".jpg,.jpeg,.gif,.png"
+                                                         id="book_image5" name="book_image5" onchange="setImage(5);">
+                            </div>
+                            <label class="col-sm-1 control-label"><i class="fa fa-times"
+                                                                     onclick="delete_div(5)"></i></label>
+                        </div>
+                        <div class="form-group" id="i55"><label class="col-sm-2 control-label"></label>
+                            <div class="col-sm-5"><img id="book_img5" style="width: 30%"></div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-white" type="reset">重置</button>
+                                <button class="btn btn-primary" type="button" onclick="update_img()">提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        //加载书籍分类信息
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "/load/category/",
+            success: function (data) {
+                if (data["info"] == "ok") {
+                    cate_info = data["cate_info"]
+                    for (i = 0; i < cate_info.length; i++) {
+                        const cate_list = cate_info[i].split(" ")
+                        for (j = 0; j < cate_list.length; j++) {
+                            if (j == 0) {
+                                $("select:eq(0)").append('<option onclick=changeOption("' + cate_list[0] + '");>' + cate_list[j] + '</option>')
+                            } else if (cate_list[j] != "") {
+                                $("select:eq(1)").append('<option class=' + cate_list[0] + '>' + cate_list[j] + '</option>')
+                            }
+                        }
+                    }
+                    changeOption("未知")
+                }
+            },
+            error: function () {
+                swal({
+                    title: "提示",
+                    text: "服务器繁忙，请稍后再试"
+                });
+            }
+        });
+        //加载要修改的书籍信息
+        load_book_info();
+    })
+
+    function update() {
+        var formData = new FormData($('#form1')[0]);
+        //对表单进行校验
+        var book_name = formData.get("book_name").trim()
+        var book_writer = formData.get("book_writer").trim()
+        var book_press = formData.get("book_press").trim()
+        var book_press_time = formData.get("book_press_time").trim()
+        var book_induction = formData.get("book_induction").trim()
+        var book_price = formData.get("book_price").trim()
+        var book_image = $("input:eq(6)").val().trim()
+        if (book_name != "" && book_writer != "" && book_press != "" && book_press_time != "" && book_induction != "" && book_price != "") {
+            if (!isNaN(Number(book_price))) {
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: "/update_book/",
+                    data: formData,
+                    processData: false,//用于对data参数进行序列化处理 这里必须false
+                    contentType: false,
+                    success: function (data) {
+                        if (data["info"] == "ok") {
+                            swal({
+                                title: "提示",
+                                text: "更新成功"
+                            });
+                            //更新隐藏域内容
+                            $("#hidden1").val($("input:eq(0)").val())
+                            $("#hidden2").val($("input:eq(1)").val())
+                            $("#hidden3").val($("input:eq(2)").val())
+                        } else {
+                            swal({
+                                title: "提示",
+                                text: "更新失败，请稍后再试"
+                            });
+                        }
+                    },
+                    error: function () {
+                        swal({
+                            title: "提示",
+                            text: "服务器繁忙，请稍后再试"
+                        });
+                    }
+                });
+            } else {
+                swal({
+                    title: "提示",
+                    text: "价格必须是数字"
+                });
+            }
+        } else {
+            swal({
+                title: "提示",
+                text: "请将信息填写完整"
+            });
+        }
+    }
+
+    function load_book_info() {
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: "/load_update_book/",
+            success: function (data) {
+                if (data["info"] == "ok") {
+                    //渲染页面书籍信息
+                    const book_info = JSON.parse(data["book_info"])
+                    $("input:eq(0)").val(book_info["book_name"])
+                    $("input:eq(1)").val(book_info["book_writer"])
+                    $("input:eq(2)").val(book_info["book_press"])
+                    $("input:eq(3)").val(book_info["book_press_time"])
+                    $("input:eq(4)").val(book_info["book_induction"])
+                    $("input:eq(5)").val(book_info["book_price"])
+                    $("select:eq(0)").val(book_info["book_type1"])
+                    $("select:eq(1)").val(book_info["book_type2"])
+                    $("input:eq(6)").val(book_info["book_price"])
+                    if (book_info["book_image1"]) $("#book_img1").attr("src", data["addr"] + book_info["book_image1"])
+                    if (book_info["book_image2"]) $("#book_img2").attr("src", data["addr"] + book_info["book_image2"])
+                    if (book_info["book_image3"]) $("#book_img3").attr("src", data["addr"] + book_info["book_image3"])
+                    if (book_info["book_image4"]) $("#book_img4").attr("src", data["addr"] + book_info["book_image4"])
+                    if (book_info["book_image5"]) $("#book_img5").attr("src", data["addr"] + book_info["book_image5"])
+                    //给隐藏域赋值
+                    $("#hidden1").val($("input:eq(0)").val())
+                    $("#hidden2").val($("input:eq(1)").val())
+                    $("#hidden3").val($("input:eq(2)").val())
+                }
+            },
+            error: function () {
+                swal({
+                    title: "提示",
+                    text: "服务器繁忙，请稍后再试"
+                });
+            }
+        });
+
+    }
+
+
+    function update_img() {
+        swal({
+            title: "提示",
+            text: "是否将当前页面的信息提交？",
+            showCancelButton: true,
+            confirmButtonColor: "#65dd19",
+            confirmButtonText: "确定",
+            closeOnConfirm: false
+        }, function () {
+            var formData = new FormData($('#form2')[0]);
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "/save_new_image/",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    if (data["info"] == "ok") {
+                        swal({
+                            title: "提示",
+                            text: "操作成功"
+                        });
+                    }
+                },
+                error: function () {
+                    swal({
+                        title: "提示",
+                        text: "服务器繁忙，请稍后再试"
+                    });
+                }
+            });
+        })
+    }
+
+    //下面用于图片上传预览功能
+    function setImage(id) {
+        $("#book_img" + id).attr("src", window.URL.createObjectURL($("#book_image" + id).prop("files")[0]))
+    }
+
+    function delete_div(id) {
+        $("#i" + id).remove()
+        $("#i" + id + id).remove()
+    }
+
+    //select中改变书籍类别
+    function changeOption(id) {
+        $("select:eq(1) option").hide()
+        $("select:eq(1)").val("")
+        $("." + id).show()
+    }
+</script>
