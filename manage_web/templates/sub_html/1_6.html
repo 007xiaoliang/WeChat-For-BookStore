@@ -1,0 +1,192 @@
+<style>
+    div {
+        overflow: hidden
+    }
+
+    span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        word-break: keep-all;
+    }
+</style>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>网上书籍上传</h2>
+        <ol class="breadcrumb">
+            <li class="active">
+                <strong>通过从当当网获取书籍信息</strong>
+            </li>
+            <li><small><a style="color: #009900">单本上传</a> </small></li>
+            <li><small><a style="color: #009900">批量上传(测试用)</a></small></li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="wrapper wrapper-content">
+        <div class="row" id="changeWay1">
+            <div class="col-lg-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <strong>选择方式</strong>
+                        <select class="form-control m-b" onchange="changeSelect(this)">
+                            <option value="http://search.dangdang.com/?key=%&act=input">单本上传</option>
+                            <option value="http://bang.dangdang.com/books/fivestars/01.00.00.00.00.00-recent30-0-0-1-">
+                                批量上传(测试用)
+                            </option>
+                        </select>
+                        <div id="keywords"><h5>输入书名:</h5><input class="form-control" type="text"></div>
+                        <div id="password" style="display: none"><h5>输入密码:</h5><input class="form-control" type="text">
+                        </div>
+                        <hr>
+                        <button class="btn btn-primary" type="button" onclick="searchdang()">确定</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 animated fadeInRight">
+                <div class="row">
+                    <div class="col-lg-12"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $('.file-box').each(function () {
+            animationHover(this, 'pulse');
+        });
+    })
+
+    //选择上传方式
+    function changeSelect(thi) {
+        t = $(thi).find("option:selected").text();
+        if (t == "单本上传") {
+            $("#keywords").show()
+            $("#password").hide()
+        } else {
+            $("#keywords").hide()
+            $("#password").show()
+        }
+    }
+
+    //提交
+    function searchdang() {
+        url = $("select").find("option:selected").val()
+        t = $("select").find("option:selected").text();
+        if (t == "单本上传") {
+            key = $("input:eq(0)").val()
+            if (key.trim() == "") {
+                $("input:eq(0)").focus()
+                swal({
+                    title: "提示",
+                    text: "请输入要搜索书名"
+                });
+            }
+            url = url.replace("%", key)
+            id = 1
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "/search/dangdang/",
+                data: {"url": url, "id": id},
+                success: function (data) {
+                    if (data["info"] == "ok") {
+                        $(".col-lg-12").text("")
+                        const page = JSON.parse(data["page_info"])
+                        if(page.length==0){
+                            $(".col-lg-12").append('<code>没有与'+key+'有关的结果</code>')
+                        }else{
+                           for (i = 0; i < page.length; i++) {
+                            append_str = '<div class="file-box"><div class="file">\n' +
+                                '                                <a onclick="save_book(this)">\n' +
+                                '                                    <div>\n' +
+                                '                                        <img  src="' + page[i]["book_image1"] + '">\n' +
+                                '                                    </div>\n' +
+                                '                                    <div class="file-name">\n' +
+                                '                                        <span>' + page[i]["book_name"] + '</span><br><span>' + page[i]["book_writer"] + '</span><br><span>' + page[i]["book_press"] + '</span>\n' +
+                                '                                        <br>\n' +
+                                '                                        <span>' + page[i]["book_press_time"] + '</span>\n' +
+                                '                                        <br>\n' +
+                                '                                        <span>' + page[i]["book_induction"] + '</span>\n' +
+                                '                                        <br>\n' +
+                                '                                        <span>¥' + page[i]["book_price"] + '</span>\n' +
+                                '                                    </div>\n' +
+                                '                                </a>\n' +
+                                '                            </div></div>'
+                            $(".col-lg-12").append(append_str)
+                            swal({
+                                title: "提示",
+                                text: "加载完成"
+                            });
+                        }
+                        }
+                    }
+                },
+                error: function () {
+                    swal({
+                        title: "提示",
+                        text: "服务器繁忙，请稍后再试"
+                    });
+                }
+            });
+        } else {
+            id = 2
+            pwd = $("input:eq(1)").val()
+            if (pwd == "zxcvbnm") {
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: "/search/dangdang/",
+                    data: {"url": url, "id": id},
+                    success: function (data) {
+                        if (data["info"] == "ok") {
+                            $(".col-lg-12").text("")
+                            const page = JSON.parse(data["page_info"])
+                            console.info(page)
+                            for (i = 0; i < page.length; i++) {
+                                append_str = '<div class="file-box"><div class="file">\n' +
+                                    '                                <a>\n' +
+                                    '                                    <div>\n' +
+                                    '                                        <img  src="' + page[i]["book_image1"] + '">\n' +
+                                    '                                    </div>\n' +
+                                    '                                    <div class="file-name">\n' +
+                                    '                                        <span>' + page[i]["book_name"] + '</span><br><span>' + page[i]["book_writer"] + '</span><br><span>' + page[i]["book_press"] + '</span>\n' +
+                                    '                                        <br>\n' +
+                                    '                                        <span>' + page[i]["book_press_time"] + '</span>\n' +
+                                    '                                        <br>\n' +
+                                    '                                        <small>' + page[i]["book_induction"] + '</small>\n' +
+                                    '                                        <br>\n' +
+                                    '                                        <span>¥' + page[i]["book_price"] + '</span>\n' +
+                                    '                                    </div>\n' +
+                                    '                                </a>\n' +
+                                    '                            </div></div>'
+                                $(".col-lg-12").append(append_str)
+                                swal({
+                                    title: "提示",
+                                    text: "加载完成"
+                                });
+                            }
+                        }
+                    },
+                    error: function () {
+                        swal({
+                            title: "提示",
+                            text: "服务器繁忙，请稍后再试"
+                        });
+                    }
+                });
+            } else {
+                swal({
+                    title: "提示",
+                    text: "测试密码错误"
+                });
+            }
+        }
+
+    }
+
+    function save_book(thi) {
+
+    }
+</script>

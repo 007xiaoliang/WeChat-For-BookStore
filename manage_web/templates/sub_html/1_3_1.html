@@ -50,9 +50,6 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group"><label class="col-sm-2 control-label"></label>
-                            <div class="col-sm-10"><img id="book_img" style="width: 30%"></div>
-                        </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
                             <div class="col-sm-4 col-sm-offset-2">
@@ -246,6 +243,7 @@
                     $("input:eq(4)").val(book_info["book_induction"])
                     $("input:eq(5)").val(book_info["book_price"])
                     $("select:eq(0)").val(book_info["book_type1"])
+                    changeOption(book_info["book_type1"])
                     $("select:eq(1)").val(book_info["book_type2"])
                     $("input:eq(6)").val(book_info["book_price"])
                     if (book_info["book_image1"]) $("#book_img1").attr("src", data["addr"] + book_info["book_image1"])
@@ -257,6 +255,17 @@
                     $("#hidden1").val($("input:eq(0)").val())
                     $("#hidden2").val($("input:eq(1)").val())
                     $("#hidden3").val($("input:eq(2)").val())
+                    //修改图片链接地址
+                    $("img").each(
+                        function () {
+                            href = $(this).attr("src")
+                            count = href.split("http://").length - 1
+                            if (count > 1) {
+                                hre = href.replace(data["addr"], "")
+                                $(this).attr('src', hre);
+                            }
+                        }
+                    )
                 }
             },
             error: function () {
@@ -284,7 +293,7 @@
                 type: "POST",
                 dataType: "json",
                 url: "/save_new_image/",
-                data: formData,
+                data: formData+"&book_img1="+$("#book_img1")[0].src,
                 processData: false,
                 contentType: false,
                 success: function (data) {

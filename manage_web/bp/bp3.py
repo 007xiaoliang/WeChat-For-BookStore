@@ -3,7 +3,7 @@
 from bson import json_util
 from flask import Blueprint, request, jsonify
 
-from utils import mongodb, pagination, redisUtils, connectionLinux, saveImage
+from utils import mongodb, pagination, redisUtils, connectionLinux, saveImage, dangRobot
 from utils.config import SERVER_IP
 from utils.models import User, db, Permission, Role
 
@@ -96,7 +96,10 @@ def load_book_view():
     if str(entries).isdigit() and str(page_now).isdigit() and int(entries) > 0 and int(page_now) > 0:
         book_list = []
         if book_name and book_name != '':
-            page_records = mdb.search({"book_name": book_name})
+            page_records = []
+            records = mdb.search({"book_name": book_name})
+            for record in records:
+                page_records.append(record)
             les = len(page_records)
         else:
             les = mdb.count()
@@ -183,6 +186,8 @@ def save_new_image_view():
     book_name = request.form.get('book_name', default="")
     book_writer = request.form.get('book_writer', default="")
     book_press = request.form.get('book_press', default="")
+    # 获取当当网图片地址
+    book_img1 = request.values.get("book_img1")
     condition = {"book_name": book_name, "book_writer": book_writer, "book_press": book_press}
     edit = {}
     # 查找原来图片的名字
@@ -194,6 +199,9 @@ def save_new_image_view():
             linux.delete_img(image_name_ori, "book_image1")
             image_name = saveImage.save_image(book_name + book_writer + book_press + "1", book_image1)
             edit["book_image1"] = image_name
+        else:
+            if not "/static/img/" in book_img1:  # 说明不是本地图片
+                edit["book_image1"] = book_img1
     except:
         # 从图片服务器删除原来的图片
         linux.delete_img(image_name_ori, "book_image1")
@@ -243,7 +251,8 @@ def save_new_image_view():
         linux.delete_img(image_name_ori, "book_image5")
         edit["book_image5"] = ""
     # 保存到数据库
-    mdb.update(condition, edit)
+    if edit:
+        mdb.update(condition, edit)
     return jsonify({'info': "ok"})
 
 
@@ -428,3 +437,15 @@ def load_category_view():
             cate_s += value + " "
         cate_list.append(cate_s)
     return jsonify({'info': "ok", "cate_info": cate_list})
+
+
+# 从当当网爬取数据
+@book_bp.route("/search/dangdang/", methods=['POST'])
+def search_dangdang_view():
+    id = request.values.get("id")  # 爬取类型，1表示爬取单条书籍，2表示批量爬取
+    url = request.values.get("url")  # 爬取路径
+    page_info = dangRobot.Robot(int(id), url).search_info()
+    # 上传到mongodb数据库
+    if int(id) is 2:
+        mdb.insert_many(page_info)
+    return jsonify({'info': "ok", "page_info": json_util.dumps(page_info)})

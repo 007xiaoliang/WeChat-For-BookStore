@@ -144,6 +144,17 @@
                             '                                </td>\n' +
                             '                            </tr>'
                         $("tbody").append(str_append)
+                        //修改图片链接地址
+                        $("td a").each(
+                            function () {
+                                href = $(this).attr("href")
+                                count=href.split("http://").length-1
+                                if(count>1){
+                                    hre=href.replace(data['server'],"")
+                                    $(this).attr('href',hre);
+                                }
+                            }
+                        )
                     }
                     //渲染分页
                     $("#append_ul").text("")

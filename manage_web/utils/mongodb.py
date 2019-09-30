@@ -13,10 +13,14 @@ class Mongodb:
         self.collection2 = self.db.lunbo_set  # 轮播图存储到lunbo_set表中
         self.collection3 = self.db.category_set  # 书籍分类信息存储到category_set表中
 
-    # 插入数据
+    # 插入数据 insert_many(items,ordered=False)
     def insert(self, content):
         ret = self.collection1.insert_one(content)
         return ret.inserted_id
+
+    # 插入多条
+    def insert_many(self, content):
+        self.collection1.insert_many(content, ordered=False)
 
     # 更新数据
     def update(self, condition, edit):
@@ -26,7 +30,10 @@ class Mongodb:
     def search(self, condition1, conditon2=None):
         info = self.collection1.find(condition1, conditon2)
         return info
-        # 查询(book_set)
+
+    def search_like(self, keyword):
+        info = self.collection1.find({'book_name': {'$regex': keyword}}, {"id": 0})
+        return info
 
     # 查询一条(book_set)
     def search_one(self, condition1, conditon2=None):
@@ -40,7 +47,7 @@ class Mongodb:
 
     # 查询(category_set)
     def search_category_set(self):
-        info = self.collection3.find({},{"_id":0 })
+        info = self.collection3.find({}, {"_id": 0})
         return info
 
     # 计数

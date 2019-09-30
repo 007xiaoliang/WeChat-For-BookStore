@@ -24,6 +24,7 @@
     <script src="{{ url_for('static', filename='js/plugins/sweetalert/sweetalert.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/plugins/dropzone/dropzone.js') }}"></script>
     <script src="{{ url_for('static', filename='js/plugins/blueimp/jquery.blueimp-gallery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/inspinia.js') }}"></script>
 </head>
 
 <body>
@@ -52,7 +53,7 @@
                         BOOK
                     </div>
                 </li>
-                <li class="active">
+                <li>
                     <a> <i class="fa fa-flask"></i> <span class="nav-label">书店简介</span> <span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
@@ -69,6 +70,7 @@
                             <li><a onclick="changePage('1_3')">修改书籍信息</a></li>
                             <li><a onclick="changePage('1_4')">上传轮播图片</a></li>
                             <li><a onclick="changePage('1_5')">设置书籍分类</a></li>
+                            <li><a onclick="changePage('1_6')">当当网数据</a></li>
                         </ul>
                     </li>
                     <li>
@@ -104,7 +106,7 @@
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li>
-                        <span class="m-r-sm text-muted welcome-message">欢迎来到ONE MORE TIME酒店管理系统&emsp;登陆级别：{{ role.role_name }}</span>
+                        <span class="m-r-sm text-muted welcome-message">欢迎书店管理系统&emsp;登陆级别：{{ role.role_name }}</span>
                     </li>
                     <li>
                         <a href="{{ url_for('login_blueprint.login_out_view') }}">
@@ -201,7 +203,6 @@
                 tooltip: false
             }
         );
-        //请求图片渲染
         changePage('{{ page_id }}');
         load_img('img1');
     });
