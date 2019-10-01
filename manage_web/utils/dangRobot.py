@@ -51,12 +51,24 @@ class Robot:
         book_press_time = tree.xpath(press_time)
         book_induction = tree.xpath(induction)
         book_price = tree.xpath(price)
-        les = 5 if len(book_name) > 5 else len(book_name)  # 默认显示搜索前五条结果
+        les = 4 if len(book_name) > 4 else len(book_name)  # 默认显示搜索前四条结果
+        if len(book_writer) < les:
+            book_writer.extend(["暂无数据"] * (les - len(book_writer)))
+        if len(book_press) < les:
+            book_press.extend(["暂无数据"] * (les - len(book_press)))
+        if len(book_press_time) < les:
+            book_press_time.extend(["暂无数据"] * (les - len(book_press_time)))
+        if len(book_induction) < les:
+            book_induction.extend(["暂无数据"] * (les - len(book_induction)))
+        if len(book_price) < les:
+            book_price.extend(["暂无数据"] * (les - len(book_price)))
+        if len(book_image1) < les:
+            book_image1.extend(["http://img3m2.ddimg.cn/71/20/25208342-1_b_0.jpg"] * (les - len(book_image1)))
         for x in range(les):
             boo_dict = {"book_name": book_name[x],
                         "book_writer": book_writer[x],
                         "book_press": book_press[x],
-                        "book_press_time": book_press_time[x].replace("/", ""),
+                        "book_press_time": book_press_time[x].replace("/", "").strip(),
                         "book_induction": book_induction[x],
                         "book_price": book_price[x].replace("¥", ""),
                         "book_type1": "未知",
@@ -94,7 +106,7 @@ class Robot:
             boo_dict = {"book_name": book_name[x].split('（')[0].split("(")[0],
                         "book_writer": book_writer[x],
                         "book_press": book_press[x],
-                        "book_press_time": book_press_time[x],
+                        "book_press_time": book_press_time[x].strip(),
                         "book_induction": "暂无介绍",
                         "book_price": book_price[x].replace("¥", ""),
                         "book_type1": book_type1,

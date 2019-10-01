@@ -151,14 +151,15 @@ def load_book_view():
 @book_bp.route("/save_new_book/", methods=['POST'])
 def save_new_book_view():
     # 接受参数
-    book_name = request.form.get('book_name', default="")
-    book_writer = request.form.get('book_writer', default="")
-    book_press = request.form.get('book_press', default="")
-    book_press_time = request.form.get('book_press_time', default="")
-    book_induction = request.form.get('book_induction', default="")
-    book_price = request.form.get('book_price', default="")
-    book_type1 = request.form.get('book_type1', default="")
-    book_type2 = request.form.get('book_type2', default="")
+    book_name = request.values.get('book_name', default="")
+    book_writer = request.values.get('book_writer', default="")
+    book_press = request.values.get('book_press', default="")
+    book_press_time = request.values.get('book_press_time', default="")
+    book_induction = request.values.get('book_induction', default="")
+    book_price = request.values.get('book_price', default="")
+    book_type1 = request.values.get('book_type1', default="未知")
+    book_type2 = request.values.get('book_type2', default="")
+    book_image1 = request.values.get('book_image1', default="")
     # 后端进行校验
     if book_name != "" and book_writer != "" and book_press != "" and book_press_time != "" and book_induction != "" and book_price != "":
         try:
@@ -168,7 +169,8 @@ def save_new_book_view():
             if ret is None:
                 i_condition = {"book_name": book_name, "book_writer": book_writer, "book_press": book_press,
                                "book_press_time": book_press_time, "book_induction": book_induction,
-                               "book_price": book_price, "book_type1": book_type1, "book_type2": book_type2}
+                               "book_price": book_price, "book_type1": book_type1, "book_type2": book_type2,
+                               "book_image1": book_image1}
                 mdb.insert(content=i_condition)
                 return jsonify({'info': "ok"})
             else:

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{#调用微信jssdk所需操作#}
+<script src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+<script>
+    $.ajax({
+        url: "/index",
+        type: "POST",
+        dataType: "json",
+        async: true,
+        data: {
+            "link": location.href.split("#")[0]
+        },
+        success: function (data) {
+            wx.config({
+                debug: true,
+                appId: data["appid"],
+                timestamp: data["timestamp"],
+                nonceStr: data["nonceStr"],
+                signature: data["signature"],
+                jsApiList: ['onMenuShareAppMessage', 'onMenuShareTimeline', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone']
+            });
+
+            //--
+            wx.ready(function () {
+
+            })
+        },
+        error: function () {
+            console.log("二次分享错误！");
+        }
+    });
+</script>
+</body>
+</html>

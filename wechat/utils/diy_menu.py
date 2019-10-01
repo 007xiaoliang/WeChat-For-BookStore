@@ -38,12 +38,11 @@ class AccessToken(object):
 
 
 class Menu(object):
-    def create(self, postData):
-        p = json.dumps(postData, ensure_ascii=False)
-        postUrl = ' https://api.weixin.qq.com/cgi-bin/menu/create?access_token={}'.format(
+    def create(self, post_data):
+        p = json.dumps(post_data, ensure_ascii=False)
+        post_url = ' https://api.weixin.qq.com/cgi-bin/menu/create?access_token={}'.format(
             AccessToken.get_access_token())
-        req = requests.post(postUrl, p.encode('utf-8'))
-        print(req.text)
+        req = requests.post(post_url, p.encode('utf-8'))
 
 
 def getMenu():
@@ -60,17 +59,17 @@ def getMenu():
                     {
                         "type": "view",
                         "name": "商城主页",
-                         "url": ROOTURL+"get_openid?state=1"
+                        "url": ROOTURL + "index"
                     },
                     {
                         "type": "view",
                         "name": "畅销热门",
-                         "url": ROOTURL+"get_openid?state=2"
+                        "url": ROOTURL + "search"
                     },
                     {
                         "type": "view",
                         "name": "我的订单",
-                        "url": ROOTURL+"get_openid?state=3"
+                        "url": ROOTURL + "get_openid?state=user"
                     }
                 ]
             },
@@ -80,12 +79,12 @@ def getMenu():
                     {
                         "type": "view",
                         "name": "留言",
-                         "url": ROOTURL+"get_openid?state=4"
+                        "url": ROOTURL + "get_openid?state=message"
                     },
                     {
                         "type": "view",
                         "name": "联系方式",
-                         "url": ROOTURL+"get_openid?state=5"
+                        "url": ROOTURL + "link"
                     }
                 ]
             }

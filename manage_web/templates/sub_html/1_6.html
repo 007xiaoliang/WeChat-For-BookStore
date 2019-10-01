@@ -29,7 +29,7 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-content">
                         <strong>选择方式</strong>
-                        <select class="form-control m-b" onchange="changeSelect(this)">
+                        <select class="form-control m-b" id="select0" onchange="changeSelect(this)">
                             <option value="http://search.dangdang.com/?key=%&act=input">单本上传</option>
                             <option value="http://bang.dangdang.com/books/fivestars/01.00.00.00.00.00-recent30-0-0-1-">
                                 批量上传(测试用)
@@ -60,7 +60,7 @@
 
     //选择上传方式
     function changeSelect(thi) {
-        t = $(thi).find("option:selected").text();
+        t = $("#select0 option:selected").text()
         if (t == "单本上传") {
             $("#keywords").show()
             $("#password").hide()
@@ -73,7 +73,7 @@
     //提交
     function searchdang() {
         url = $("select").find("option:selected").val()
-        t = $("select").find("option:selected").text();
+        t = $("#select0 option:selected").text()
         if (t == "单本上传") {
             key = $("input:eq(0)").val()
             if (key.trim() == "") {
@@ -82,54 +82,65 @@
                     title: "提示",
                     text: "请输入要搜索书名"
                 });
-            }
-            url = url.replace("%", key)
-            id = 1
-            $.ajax({
-                type: "POST",
-                dataType: "json",
-                url: "/search/dangdang/",
-                data: {"url": url, "id": id},
-                success: function (data) {
-                    if (data["info"] == "ok") {
-                        $(".col-lg-12").text("")
-                        const page = JSON.parse(data["page_info"])
-                        if(page.length==0){
-                            $(".col-lg-12").append('<code>没有与'+key+'有关的结果</code>')
-                        }else{
-                           for (i = 0; i < page.length; i++) {
-                            append_str = '<div class="file-box"><div class="file">\n' +
-                                '                                <a onclick="save_book(this)">\n' +
-                                '                                    <div>\n' +
-                                '                                        <img  src="' + page[i]["book_image1"] + '">\n' +
-                                '                                    </div>\n' +
-                                '                                    <div class="file-name">\n' +
-                                '                                        <span>' + page[i]["book_name"] + '</span><br><span>' + page[i]["book_writer"] + '</span><br><span>' + page[i]["book_press"] + '</span>\n' +
-                                '                                        <br>\n' +
-                                '                                        <span>' + page[i]["book_press_time"] + '</span>\n' +
-                                '                                        <br>\n' +
-                                '                                        <span>' + page[i]["book_induction"] + '</span>\n' +
-                                '                                        <br>\n' +
-                                '                                        <span>¥' + page[i]["book_price"] + '</span>\n' +
-                                '                                    </div>\n' +
-                                '                                </a>\n' +
-                                '                            </div></div>'
-                            $(".col-lg-12").append(append_str)
-                            swal({
-                                title: "提示",
-                                text: "加载完成"
-                            });
+            } else {
+                url = url.replace("%", key)
+                id = 1
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: "/search/dangdang/",
+                    data: {"url": url, "id": id},
+                    success: function (data) {
+                        if (data["info"] == "ok") {
+                            $(".col-lg-12").text("")
+                            $("#appenddiv").remove()
+                            const page = JSON.parse(data["page_info"])
+                            if (page.length == 0) {
+                                $(".col-lg-12").append('<code>没有与' + key + '有关的结果</code>')
+                            } else {
+                                for (i = 0; i < page.length; i++) {
+                                    append_str = '<div class="file-box"><div class="file">\n' +
+                                        '                                <a onclick="save_book(this)">\n' +
+                                        '                                    <div>\n' +
+                                        '                                        <img  src="' + page[i]["book_image1"] + '">\n' +
+                                        '                                    </div>\n' +
+                                        '                                    <div class="file-name">\n' +
+                                        '                                        <span>' + page[i]["book_name"] + '</span><br><span>' + page[i]["book_writer"] + '</span><br><span>' + page[i]["book_press"] + '</span>\n' +
+                                        '                                        <br>\n' +
+                                        '                                        <span>' + page[i]["book_press_time"] + '</span>\n' +
+                                        '                                        <br>\n' +
+                                        '                                        <span>' + page[i]["book_induction"] + '</span>\n' +
+                                        '                                        <br>\n' +
+                                        '                                        <span>¥' + page[i]["book_price"] + '</span>\n' +
+                                        '                                    </div>\n' +
+                                        '                                </a>\n' +
+                                        '                            </div><input type="hidden" value="' + page[i]["book_image1"] + '&' + page[i]["book_name"] + '&' + page[i]["book_writer"] + '&' + page[i]["book_press"] + '&' + page[i]["book_press_time"] + '&' + page[i]["book_induction"] + '&' + page[i]["book_price"] + '"></div>'
+                                    $(".col-lg-12").append(append_str)
+                                    swal({
+                                        title: "提示",
+                                        text: "加载完成"
+                                    });
+                                }
+                                $(".col-lg-12").append('<div class="file-box" id="option" style="display:none">\n' +
+                                    '                            <hr><input type="hidden"><h1>选择操作</h1>\n' +
+                                    '                            <br>\n' +
+                                    '                            <button class="btn btn-primary" type="button" onclick="submit_result()">提交</button>\n' +
+                                    '                            <button class="btn btn-primary" type="button" onclick="update_result()">修改</button>\n' +
+                                    '                            <br>\n' +
+                                    '                            <hr>\n' +
+                                    '                        </div>')
+                            }
                         }
-                        }
+                    },
+                    error: function () {
+                        swal({
+                            title: "提示",
+                            text: "服务器繁忙，请稍后再试"
+                        });
                     }
-                },
-                error: function () {
-                    swal({
-                        title: "提示",
-                        text: "服务器繁忙，请稍后再试"
-                    });
-                }
-            });
+                });
+            }
+
         } else {
             id = 2
             pwd = $("input:eq(1)").val()
@@ -187,6 +198,218 @@
     }
 
     function save_book(thi) {
+        const this_div = $(thi).parent().parent()
+        $(this_div).parent().children("div").show()
+        $(this_div).hide()
+        $("#option").show()
+        $("#option").insertAfter($(this_div))
+        //将隐藏域内容赋值到option div中
+        $("#option").children("input").val($(this_div).children("input").val())
+        $("#appenddiv").remove()
+    }
 
+    function submit_result() {
+        arr = $("#option").children("input").val().split("&")
+        condition = {
+            "book_image1": arr[0], "book_name": arr[1], "book_writer": arr[2], "book_press": arr[3],
+            "book_press_time": arr[4], "book_induction": arr[5], "book_price": arr[6], "book_type1": "未知"
+        }
+        //发送ajax提交
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "/save_new_book/",
+            data: condition,
+            success: function (data) {
+                if (data["info"] == "ok") {
+                    swal({
+                        title: "提示",
+                        text: "提交成功，默认类型为未知，如需修改请前往修改页面"
+                    });
+                } else if (data["info"] == "img_exits") {
+                    swal({
+                        title: "提示",
+                        text: "数据库已有同名书籍"
+                    });
+                }
+            },
+            error: function () {
+                swal({
+                    title: "提示",
+                    text: "服务器繁忙，请稍后再试"
+                });
+            }
+        });
+    }
+
+    function update_result() {
+        arr = $("#option").children("input").val().split("&")
+        $("#option").parent().parent().parent().append('<div class="row" id="appenddiv">\n' +
+            '        <div class="col-lg-11">\n' +
+            '            <div class="ibox float-e-margins">\n' +
+            '                <div class="ibox-title">\n' +
+            '                    <h5>修改所需内容，这里不允许图片修改</h5>\n' +
+            '                </div>\n' +
+            '                <div class="ibox-content">\n' +
+            '                    <form id="form1" class="form-horizontal">\n' +
+            '                        <div class="form-group"><label class="col-sm-2 control-label">书名</label>\n' +
+            '                            <div class="col-sm-10"><input type="text" class="form-control" name="book_name"></div>\n' +
+            '                        </div>\n' +
+            '                        <div class="form-group"><label class="col-sm-2 control-label">作者</label>\n' +
+            '                            <div class="col-sm-10"><input type="text" class="form-control" name="book_writer"></div>\n' +
+            '                        </div>\n' +
+            '                        <div class="form-group"><label class="col-sm-2 control-label">出版社</label>\n' +
+            '                            <div class="col-sm-10"><input type="text" class="form-control" name="book_press"></div>\n' +
+            '                        </div>\n' +
+            '                        <div class="form-group"><label class="col-sm-2 control-label">出版时间</label>\n' +
+            '                            <div class="col-sm-10"><input type="text" readonly="readonly" class="form-control" name="book_press_time"></div>\n' +
+            '                        </div>\n' +
+            '                        <div class="form-group"><label class="col-sm-2 control-label">书籍简介</label>\n' +
+            '                            <div class="col-sm-10"><input type="text" class="form-control" name="book_induction"\n' +
+            '                                                          placeholder="关于书籍的一些简介描述">\n' +
+            '                            </div>\n' +
+            '                        </div>\n' +
+            '                        <div class="form-group"><label class="col-sm-2 control-label">价格</label>\n' +
+            '                            <div class="col-sm-10"><input type="text" class="form-control" name="book_price"\n' +
+            '                                                          placeholder="请输入数字，单位为￥"></div>\n' +
+            '                        </div>\n' +
+            '                        <div class="form-group"><label class="col-sm-2 control-label">图片1</label>\n' +
+            '                            <div class="col-sm-10"><input type="text" class="form-control" readonly="readonly" name="book_image1"></div>\n' +
+            '                        </div>\n' +
+            '                        <div class="form-group"><label class="col-sm-2 control-label">一级类名</label>\n' +
+            '                            <div class="col-sm-10">\n' +
+            '                                <select class="form-control m-b" name="book_type1">\n' +
+            '                                </select>\n' +
+            '                            </div>\n' +
+            '                        </div>\n' +
+            '                        <div class="form-group"><label class="col-sm-2 control-label">二级类名</label>\n' +
+            '                            <div class="col-sm-10">\n' +
+            '                                <select class="form-control m-b" name="book_type2">\n' +
+            '                                </select>\n' +
+            '                            </div>\n' +
+            '                        </div>\n' +
+            '                        <div class="hr-line-dashed"></div>\n' +
+            '                        <div class="form-group">\n' +
+            '                            <div class="col-sm-4 col-sm-offset-2">\n' +
+            '                                <button class="btn btn-white" type="reset">重置</button>\n' +
+            '                                <button class="btn btn-primary" type="button" onclick="login()">修改并提交</button>\n' +
+            '                            </div>\n' +
+            '                        </div>\n' +
+            '                    </form>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '        </div>\n' +
+            '    </div>')
+        //加载书籍分类信息
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "/load/category/",
+            success: function (data) {
+                if (data["info"] == "ok") {
+                    cate_info = data["cate_info"]
+                    for (i = 0; i < cate_info.length; i++) {
+                        const cate_list = cate_info[i].split(" ")
+                        for (j = 0; j < cate_list.length; j++) {
+                            if (j == 0) {
+                                $("select:eq(1)").append('<option onclick=changeOption("' + cate_list[0] + '");>' + cate_list[j] + '</option>')
+                            } else if (cate_list[j] != "") {
+                                $("select:eq(2)").append('<option class=' + cate_list[0] + '>' + cate_list[j] + '</option>')
+                            }
+                        }
+                    }
+                    changeOption("未知")
+                    //加载数据
+                    $("#appenddiv input:eq(0)").val(arr[1])
+                    $("#appenddiv input:eq(1)").val(arr[2])
+                    $("#appenddiv input:eq(2)").val(arr[3])
+                    $("#appenddiv input:eq(3)").val(arr[4])
+                    $("#appenddiv input:eq(4)").val(arr[5])
+                    $("#appenddiv input:eq(5)").val(arr[6])
+                    $("#appenddiv input:eq(6)").val(arr[0])
+                    $("#appenddiv select:eq(0)").val("未知")
+                }
+            },
+            error: function () {
+                swal({
+                    title: "提示",
+                    text: "服务器繁忙，请稍后再试"
+                });
+            }
+        });
+    }
+
+    function login() {
+        var formData = new FormData($('#form1')[0]);
+        //对表单进行校验
+        var book_name = formData.get("book_name").trim()
+        var book_writer = formData.get("book_writer").trim()
+        var book_press = formData.get("book_press").trim()
+        var book_press_time = formData.get("book_press_time").trim()
+        var book_induction = formData.get("book_induction").trim()
+        var book_price = formData.get("book_price").trim()
+        if (book_name != "" && book_writer != "" && book_press != "" && book_press_time != "" && book_induction != "" && book_price != "") {
+            if (!isNaN(Number(book_price))) {
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: "/save_new_book/",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        if (data["info"] == "ok") {
+                            swal({
+                                title: "提示",
+                                text: "修改成功"
+                            });
+                            $("#hidden1").val($("input:eq(0)").val())
+                            $("#hidden2").val($("input:eq(1)").val())
+                            $("#hidden3").val($("input:eq(2)").val())
+                            $("#upload_img").show()
+
+                        } else if (data["info"] == "img_exits") {
+                            swal({
+                                title: "提示",
+                                text: "数据库已有相同书籍"
+                            });
+                        } else if (data["info"] == "data_no") {
+                            swal({
+                                title: "提示",
+                                text: "填写数据不完整"
+                            });
+                        } else {
+                            swal({
+                                title: "提示",
+                                text: "填写数据不完整"
+                            });
+                        }
+                    },
+                    error: function () {
+                        swal({
+                            title: "提示",
+                            text: "服务器繁忙，请稍后再试"
+                        });
+                    }
+                });
+            } else {
+                swal({
+                    title: "提示",
+                    text: "价格必须是数字"
+                });
+            }
+        } else {
+            swal({
+                title: "提示",
+                text: "请将信息填写完整"
+            });
+        }
+    }
+
+    //select中改变书籍类别
+    function changeOption(id) {
+        $("select:eq(2) option").hide()
+        $("select:eq(2)").val("")
+        $("." + id).show()
     }
 </script>

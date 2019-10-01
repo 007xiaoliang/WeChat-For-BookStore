@@ -11,57 +11,24 @@
     <link href="{{ url_for('static', filename='css/sweetalert.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/application.css') }}" rel="stylesheet">
     <title>圆梦书店</title>
-    <script src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
-    <script>
-        $.ajax({
-            url: "/index",
-            type: "POST",
-            dataType: "json",
-            async: true,
-            data: {
-                "link": location.href.split("#")[0]
-            },
-            success: function (data) {
-                wx.config({
-                    debug: true,
-                    appId: data["appid"],
-                    timestamp: data["timestamp"],
-                    nonceStr: data["nonceStr"],
-                    signature: data["signature"],
-                    jsApiList: ['onMenuShareAppMessage', 'onMenuShareTimeline', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone']
-                });
 
-                //--
-                wx.ready(function () {
-
-                })
-            },
-            error: function () {
-                console.log("二次分享错误！");
-            }
-        });
-    </script>
 </head>
 <body>
 <nav id="menu">
     <ul class="menu">
-        <li><a href="#"><img src="{{ url_for('static', filename='img/icons/glass.png') }}">眼镜</a>
-            <ul>
-                <li><a href="#">男士</a></li>
-                <li><a href="#">女士</a></li>
-            </ul>
-        </li>
-        <li><a href="#"><img src="{{ url_for('static', filename='img/icons/mc.png') }}">男装</a>
-            <ul>
-                <li><a href="#">大衣</a></li>
-                <li><a href="#">西裤</a></li>
-            </ul>
-        </li>
-        <li><a href="#"><img src="{{ url_for('static', filename='img/icons/od.png') }}">户外</a>
-            <ul>
-                <li><a href="#">户外鞋</a></li>
-            </ul>
-        </li>
+        {% for cate in cate_list %}
+            <li><a href="#"><img src="{{ url_for('static', filename='img/icons/house.png') }}">{{ cate["1"] }}</a>
+                {% if cate["1"]!="未知" %}
+                    <ul>
+                        {% for k,v in cate.items() %}
+                            {% if k!="1" %}
+                                <li><a href="#">{{ v }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </li>
+        {% endfor %}
     </ul>
 </nav>
 <div class="mmenu-page">
@@ -78,14 +45,14 @@
     </header>
     <div class="slide">
         <ul>
-            <li><a href="#"><img src="{{ url_for('static', filename='resource/lunbo1.jpg') }}"/></a></li>
-            <li><a href="#"><img src="{{ url_for('static', filename='resource/lunbo2.jpg') }}"/></a></li>
-            <li><a href="#"><img src="{{ url_for('static', filename='resource/lunbo3.jpg') }}"/></a></li>
+            {% for lunbo in lunbo_info %}
+                <li><a href="#"><img src="{{ lunbo }}"/></a></li>
+            {% endfor %}
         </ul>
         <div class="dot">
-            <span></span>
-            <span></span>
-            <span></span>
+            {% for lunbo in lunbo_info %}
+                <span></span>
+            {% endfor %}
         </div>
     </div>
     <section>
