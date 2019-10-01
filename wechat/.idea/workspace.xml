@@ -1,164 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ac52d4e4-e7b3-43cc-b9c5-d3dfa9e6675d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml-4.4.1.dist-info/INSTALLER" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml-4.4.1.dist-info/LICENSES.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml-4.4.1.dist-info/METADATA" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml-4.4.1.dist-info/RECORD" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml-4.4.1.dist-info/WHEEL" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml-4.4.1.dist-info/top_level.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/ElementInclude.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/_elementpath.cp36-win_amd64.pyd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/_elementpath.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/builder.cp36-win_amd64.pyd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/builder.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/cssselect.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/doctestcompare.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/etree.cp36-win_amd64.pyd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/etree.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/etree_api.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/html/ElementSoup.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/html/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/html/_diffcommand.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/html/_html5builder.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/html/_setmixin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/html/builder.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/html/clean.cp36-win_amd64.pyd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/html/clean.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/html/defs.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/html/diff.cp36-win_amd64.pyd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/html/diff.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/html/formfill.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/html/html5parser.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/html/soupparser.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/html/usedoctest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/__init__.pxd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/c14n.pxd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/config.pxd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/dtdvalid.pxd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/etree_defs.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/etreepublic.pxd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/htmlparser.pxd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libexslt/exslt.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libexslt/exsltconfig.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libexslt/exsltexports.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libexslt/libexslt.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/DOCBparser.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/HTMLparser.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/HTMLtree.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/SAX.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/SAX2.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/c14n.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/catalog.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/chvalid.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/debugXML.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/dict.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/encoding.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/entities.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/globals.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/hash.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/list.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/nanoftp.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/nanohttp.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/parser.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/parserInternals.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/pattern.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/relaxng.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/schemasInternals.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/schematron.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/threads.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/tree.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/uri.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/valid.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/xinclude.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/xlink.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/xmlIO.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/xmlautomata.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/xmlerror.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/xmlexports.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/xmlmemory.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/xmlmodule.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/xmlreader.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/xmlregexp.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/xmlsave.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/xmlschemas.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/xmlschemastypes.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/xmlstring.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/xmlunicode.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/xmlversion.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/xmlwriter.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/xpath.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/xpathInternals.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxml/xpointer.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxslt/attributes.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxslt/documents.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxslt/extensions.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxslt/extra.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxslt/functions.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxslt/imports.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxslt/keys.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxslt/libxslt.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxslt/namespaces.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxslt/numbersInternals.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxslt/preproc.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxslt/security.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxslt/templates.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxslt/transform.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxslt/trio.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxslt/triodef.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxslt/variables.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxslt/win32config.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxslt/xslt.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxslt/xsltInternals.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxslt/xsltconfig.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxslt/xsltexports.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxslt/xsltlocale.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/libxslt/xsltutils.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/lxml-version.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/relaxng.pxd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/schematron.pxd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/tree.pxd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/uri.pxd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/xinclude.pxd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/xmlerror.pxd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/xmlparser.pxd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/xmlschema.pxd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/xpath.pxd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/includes/xslt.pxd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/isoschematron/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/isoschematron/resources/rng/iso-schematron.rng" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/isoschematron/resources/xsl/RNG2Schtrn.xsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/isoschematron/resources/xsl/XSD2Schtrn.xsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/isoschematron/resources/xsl/iso-schematron-xslt1/iso_abstract_expand.xsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/isoschematron/resources/xsl/iso-schematron-xslt1/iso_dsdl_include.xsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/isoschematron/resources/xsl/iso-schematron-xslt1/iso_schematron_message.xsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/isoschematron/resources/xsl/iso-schematron-xslt1/iso_schematron_skeleton_for_xslt1.xsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/isoschematron/resources/xsl/iso-schematron-xslt1/iso_svrl_for_xslt1.xsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/isoschematron/resources/xsl/iso-schematron-xslt1/readme.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/lxml.etree.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/lxml.etree_api.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/objectify.cp36-win_amd64.pyd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/pyclasslookup.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/sax.cp36-win_amd64.pyd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/sax.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../venv/Lib/site-packages/lxml/usedoctest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_copy.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/temp.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../manage_web/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../manage_web/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../manage_web/bp/bp3.py" beforeDir="false" afterPath="$PROJECT_DIR$/../manage_web/bp/bp3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../manage_web/templates/sub_html/1_6.html" beforeDir="false" afterPath="$PROJECT_DIR$/../manage_web/templates/sub_html/1_6.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../manage_web/utils/dangRobot.py" beforeDir="false" afterPath="$PROJECT_DIR$/../manage_web/utils/dangRobot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/diy_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/diy_menu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/mongodb.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/mongodb.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/reply.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/reply.py" afterDir="false" />
-    </list>
+    <list default="true" id="ac52d4e4-e7b3-43cc-b9c5-d3dfa9e6675d" name="Default Changelist" comment="项目迁移至云服务器做的一次性提交" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -242,8 +85,16 @@
       <workItem from="1569675036707" duration="562000" />
       <workItem from="1569723310080" duration="17095000" />
       <workItem from="1569754156481" duration="622000" />
-      <workItem from="1569926638249" duration="5363000" />
+      <workItem from="1569926638249" duration="5610000" />
     </task>
+    <task id="LOCAL-00001" summary="项目迁移至云服务器做的一次性提交">
+      <created>1569943658022</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1569943658022</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -263,7 +114,8 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="项目迁移至云服务器做的一次性提交" />
+    <option name="LAST_COMMIT_MESSAGE" value="项目迁移至云服务器做的一次性提交" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/wechat$diy_menu.coverage" NAME="diy_menu Coverage Results" MODIFIED="1569406956746" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
