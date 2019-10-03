@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4452d276-2241-423a-99b4-b76b221602fc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/start.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../wechat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../wechat/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="4452d276-2241-423a-99b4-b76b221602fc" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,6 +143,7 @@
       <workItem from="1569906598912" duration="13454000" />
       <workItem from="1570082004215" duration="3908000" />
       <workItem from="1570101906219" duration="1846000" />
+      <workItem from="1570117679543" duration="277000" />
     </task>
     <task id="LOCAL-00001" summary="添加manage_web项目中requirements.txt文件">
       <created>1569725223394</created>
@@ -169,7 +166,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569861052188</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="后台管理代码上传供flask在linux上部署">
+      <created>1570117942386</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1570117942387</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -192,7 +196,8 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="添加manage_web项目中requirements.txt文件" />
     <MESSAGE value="2019年10月1日零点修改提交，测试代码是否上传至GitHub" />
-    <option name="LAST_COMMIT_MESSAGE" value="2019年10月1日零点修改提交，测试代码是否上传至GitHub" />
+    <MESSAGE value="后台管理代码上传供flask在linux上部署" />
+    <option name="LAST_COMMIT_MESSAGE" value="后台管理代码上传供flask在linux上部署" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
