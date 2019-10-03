@@ -31,7 +31,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../manage_web" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
@@ -88,6 +88,8 @@
       <workItem from="1569723310080" duration="17095000" />
       <workItem from="1569754156481" duration="622000" />
       <workItem from="1569926638249" duration="6681000" />
+      <workItem from="1569994910574" duration="874000" />
+      <workItem from="1570080033166" duration="609000" />
     </task>
     <task id="LOCAL-00001" summary="项目迁移至云服务器做的一次性提交">
       <created>1569943658022</created>
@@ -110,7 +112,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569944206994</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="项目迁移至云服务器做的一次性提交">
+      <created>1569994953684</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1569994953684</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
