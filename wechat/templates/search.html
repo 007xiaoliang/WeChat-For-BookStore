@@ -10,15 +10,11 @@
     <meta http-equiv="cache-control" content="no-cache">
     <link href="{{ url_for('static', filename='css/sweetalert.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/application.css') }}" rel="stylesheet">
-    <title>圆梦书店</title>
-    <style>
-        .pagination {
-            color: #5b7d80;
-        }
-    </style>
+    <title></title>
 </head>
 <body>
-<div class="searchview"><i class="icon-finder"></i><input type="text"><a class="btn-search">搜索</a></div>
+<div class="searchview"><i class="icon-finder"></i><input type="text"><a class="btn-search" onclick="search_keyword();">搜索</a>
+</div>
 <div class="mmenu-page">
     <section>
         <div class="category">
@@ -66,9 +62,9 @@
                 var scrollTop = $(this).scrollTop();
                 var scrollHeight = $(document).height();
                 var windowHeight = $(this).height();
-                if ((scrollTop + windowHeight) / scrollHeight > 0.9999) {
+                if ((scrollTop + windowHeight) / scrollHeight==1) {
+                    pageid++
                     //滚动条到底动态加载数据
-                    pageid = pageid + 1
                     $.ajax({
                         url: "/search/reload",
                         type: "GET",
@@ -145,6 +141,48 @@
                 window.location.href = "https://www.baidu.com"
             }
         });
+    }
+
+    function search_keyword() {
+        //获取输入框内容
+        reg = /\+/g
+        keyword = $("input:eq(0)").val().trim().replace(reg, "*******")
+        if (keyword != "") {
+            $.ajax({
+                url: "/search",
+                type: "GET",
+                dataType: "json",
+                data: {"keyword": keyword},
+                async: true,
+                success: function (data) {
+                    const count = data["count"]
+                    const main_info = data["info_list"]
+                    $(".category").text("")
+                    $(".category").append("<small style='color:gray'>为您找到相关信息" + count + "条</>")
+                    for (i = 0; i < main_info.length; i++) {
+                        book_name = main_info[i]["book_name"].replace(reg, "*******")
+                        book_writer = main_info[i]["book_writer"].replace(reg, "*******")
+                        book_press = main_info[i]["book_press"].replace(reg, "*******")
+                        appstr = '<div class="thumbnail">\n' +
+                            '                    <a href="/details?book_name=' + book_name + '&book_writer=' + book_writer + '&book_press=' + book_press + '">\n' +
+                            '                        <img src="' + main_info[i]["book_image1"] + '">\n' +
+                            '                        <div class="caption">\n' +
+                            '                            <h3>' + main_info[i]["book_name"] + '</h3>\n' +
+                            '                            <p>' + main_info[i]["book_writer"] + '</p>\n' +
+                            '                            <p>' + main_info[i]["book_press"] + '</p>\n' +
+                            '                            <div class="price">' + main_info[i]["book_price"] + '<i>元</i>\n' +
+                            '                            </div>\n' +
+                            '                        </div>\n' +
+                            '                    </a>\n' +
+                            '                </div>'
+                        $(".category").append(appstr)
+                    }
+                },
+                error: function () {
+                    window.location.href = "https://www.baidu.com"
+                }
+            });
+        }
     }
 
 </script>

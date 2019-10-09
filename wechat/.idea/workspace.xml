@@ -2,17 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ac52d4e4-e7b3-43cc-b9c5-d3dfa9e6675d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/bp/bookinfo_bp.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/details.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/search.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/util.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../manage_web/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../manage_web/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../manage_web/bp/bp2.py" beforeDir="false" afterPath="$PROJECT_DIR$/../manage_web/bp/bp2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../manage_web/bp/bp3.py" beforeDir="false" afterPath="$PROJECT_DIR$/../manage_web/bp/bp3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../manage_web/utils/redisUtils.py" beforeDir="false" afterPath="$PROJECT_DIR$/../manage_web/utils/redisUtils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bp/bookinfo_bp.py" beforeDir="false" afterPath="$PROJECT_DIR$/bp/bookinfo_bp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/details.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/details.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/search.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/mongodb.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/mongodb.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/reply.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/reply.py" afterDir="false" />
     </list>
@@ -133,7 +126,7 @@
       <workItem from="1570361860109" duration="12243000" />
       <workItem from="1570430731528" duration="10409000" />
       <workItem from="1570510073338" duration="23077000" />
-      <workItem from="1570595344704" duration="8486000" />
+      <workItem from="1570595344704" duration="21058000" />
     </task>
     <task id="LOCAL-00001" summary="项目迁移至云服务器做的一次性提交">
       <created>1569943658022</created>
@@ -163,7 +156,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569994953684</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="公众号页面内容添加了搜索，下拉动态加载等功能">
+      <created>1570606659273</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1570606659273</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -184,13 +184,14 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="项目迁移至云服务器做的一次性提交" />
-    <option name="LAST_COMMIT_MESSAGE" value="项目迁移至云服务器做的一次性提交" />
+    <MESSAGE value="公众号页面内容添加了搜索，下拉动态加载等功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="公众号页面内容添加了搜索，下拉动态加载等功能" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/wechat$diy_menu.coverage" NAME="diy_menu Coverage Results" MODIFIED="1569406956746" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
     <SUITE FILE_PATH="coverage/wechat$CreateSign.coverage" NAME="CreateSign Coverage Results" MODIFIED="1569400594211" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
-    <SUITE FILE_PATH="coverage/wechat$mongodb.coverage" NAME="mongodb Coverage Results" MODIFIED="1570450739903" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
-    <SUITE FILE_PATH="coverage/wechat$wechat.coverage" NAME="wechat Coverage Results" MODIFIED="1570605341475" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/wechat$mongodb.coverage" NAME="mongodb Coverage Results" MODIFIED="1570622275982" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
+    <SUITE FILE_PATH="coverage/wechat$wechat.coverage" NAME="wechat Coverage Results" MODIFIED="1570622809946" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/wechat$demo.coverage" NAME="demo Coverage Results" MODIFIED="1570521672678" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bp" />
   </component>
 </project>

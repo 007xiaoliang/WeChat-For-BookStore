@@ -54,12 +54,16 @@ class Reply:
             if count < 3:
                 if flag:
                     flag = False
-                content +=u["book_name"] + "\n" + \
+                book_name = u["book_name"].replace("+", "*******")
+                book_writer = u["book_writer"].replace("+", "*******")
+                book_press = u["book_press"].replace("+", "*******")
+                content += u["book_name"] + "\n" + \
                            "作者:" + u["book_writer"] + "\n" + \
-                           "出版社:" + u["book_press"] + "\n*****\n"
+                           "出版社:" + u[
+                               "book_press"] + "\n<a href='" + ROOTURL + "details?book_name=" + book_name + "&book_writer=" + book_writer + "&book_press=" + book_press + "'>点击了解详情</a>\n*****\n"
                 count += 1
             else:
-                content += "......\n<a href='" + ROOTURL + "index?key=" + keyword + "'>查看更多请点击</a>"
+                content += "......\n<a href='" + ROOTURL + "search?keyword=" + keyword + "'>查看更多请点击</a>"
                 break
         if flag:
             return "没有查询到与 " + keyword + " 有关的内容"

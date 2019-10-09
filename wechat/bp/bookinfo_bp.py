@@ -47,7 +47,7 @@ def details_view():
     # 查询图书详细信息并返回页面
     condition = {"book_name": book_name, "book_writer": book_writer, "book_press": book_press}
     book_info = mdb.search_one(condition=condition)
-    book_info=check_image(book_info)
+    book_info = check_image(book_info)
     book_image = []
     for k, v in book_info.items():
         if "book_image" in k:
@@ -87,3 +87,11 @@ def search_reload_view():
         cate = check_image(cate)
         info_list.append(cate)
     return jsonify({"main_info": info_list})
+
+
+# 根据关键字搜索
+@book_info_bp.route('/search', methods=["GET", "POST"])
+def search_view():
+    keyword = request.values.get("keyword").replace("*******", "+")
+    count, info_list = mdb.search_in_keyword(keyword=keyword)
+    return jsonify({"info_list": info_list, "count": count})

@@ -21,6 +21,10 @@ class Mongodb:
         count = self.collection1.count_documents({})
         return count
 
+    # 根据条件查询
+    def search(self, condition):
+        return self.collection1.find(condition)
+
     # 根据条件查询一条
     def search_one(self, condition):
         return self.collection1.find_one(condition)
@@ -64,6 +68,20 @@ class Mongodb:
         finally:
             return cate_info
 
+    # 关键字搜索
+    def search_in_keyword(self, keyword):
+        query_filter = {"$or": [{"book_name": {'$regex': keyword}}, {"book_writer": {'$regex': keyword}},
+                                {"book_press": {'$regex': keyword}}, {"book_induction": {'$regex': keyword}},
+                                {"book_type1": {'$regex': keyword}}, {"book_type2": {'$regex': keyword}},
+                                {"book_press_time": {'$regex': keyword}}, {"book_image1": {'$regex': keyword}}]}
+        search_info = self.collection1.find(query_filter, {"_id": 0})
+        info_list = []
+        count = 0
+        for info in search_info:
+            count += 1
+            info_list.append(check_image(info))
+        return count, info_list
+
 
 if __name__ == '__main__':
-    print(Mongodb().main_search())
+    print(Mongodb().search_in_keyword("学"))
