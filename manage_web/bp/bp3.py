@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from bson import json_util
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, session
 
 from utils import mongodb, pagination, redisUtils, connectionLinux, saveImage, dangRobot
 from utils.config import SERVER_IP
@@ -320,9 +320,9 @@ def update_book_view():
 @book_bp.route("/load_update_book/", methods=['GET'])
 def load_update_book_view():
     # 从redis数据库拿到要更新的书籍
-    book_name = reu.search("book_name").decode("utf-8")
-    book_writer = reu.search("book_writer").decode("utf-8")
-    book_press = reu.search("book_press").decode("utf-8")
+    book_name = reu.search("book_name"+session['user']).decode("utf-8")
+    book_writer = reu.search("book_writer"+session['user']).decode("utf-8")
+    book_press = reu.search("book_press"+session['user']).decode("utf-8")
     # 根据书籍信息去mongodb查询
     book_info = json_util.dumps(
         mdb.search_one({"book_name": book_name, "book_writer": book_writer, "book_press": book_press}))

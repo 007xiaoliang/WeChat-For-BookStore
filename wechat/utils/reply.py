@@ -50,11 +50,11 @@ class Reply:
         flag = True
         content = "查询结果如下:\n*****\n"
         count = 0
-        for u in self.mdb.search_like(keyword):
+        for u in self.mdb.search({'book_name': {'$regex': keyword}}):
             if count < 3:
                 if flag:
                     flag = False
-                content += "书名:" + u["book_name"] + "\n" + \
+                content +=u["book_name"] + "\n" + \
                            "作者:" + u["book_writer"] + "\n" + \
                            "出版社:" + u["book_press"] + "\n*****\n"
                 count += 1

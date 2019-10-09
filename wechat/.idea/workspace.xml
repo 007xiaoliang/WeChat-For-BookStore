@@ -2,7 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ac52d4e4-e7b3-43cc-b9c5-d3dfa9e6675d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/bp/bookinfo_bp.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/details.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/search.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/util.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../manage_web/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../manage_web/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../manage_web/bp/bp2.py" beforeDir="false" afterPath="$PROJECT_DIR$/../manage_web/bp/bp2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../manage_web/bp/bp3.py" beforeDir="false" afterPath="$PROJECT_DIR$/../manage_web/bp/bp3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../manage_web/utils/redisUtils.py" beforeDir="false" afterPath="$PROJECT_DIR$/../manage_web/utils/redisUtils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/mongodb.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/mongodb.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/reply.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/reply.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,8 +26,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Flask Main" />
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -31,11 +43,13 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../manage_web" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\ThirdProject\wechat\templates" />
+      <recent name="F:\ThirdProject\wechat\bp" />
       <recent name="F:\ThirdProject\wechat" />
       <recent name="F:\ThirdProject\wechat\static" />
       <recent name="F:\ThirdProject\wechat\utils" />
@@ -53,7 +67,29 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Flask server.wechat">
+    <configuration name="mongodb" type="PythonConfigurationType" factoryName="Python">
+      <module name="wechat" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils/mongodb.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="wechat" type="Python.FlaskServer">
       <option name="flaskDebug" value="true" />
       <module name="wechat" />
@@ -70,6 +106,10 @@
       <option name="launchJavascriptDebuger" value="false" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Flask server.wechat" />
+      <item itemvalue="Python.mongodb" />
+    </list>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -90,6 +130,10 @@
       <workItem from="1569926638249" duration="6681000" />
       <workItem from="1569994910574" duration="874000" />
       <workItem from="1570080033166" duration="609000" />
+      <workItem from="1570361860109" duration="12243000" />
+      <workItem from="1570430731528" duration="10409000" />
+      <workItem from="1570510073338" duration="23077000" />
+      <workItem from="1570595344704" duration="8486000" />
     </task>
     <task id="LOCAL-00001" summary="项目迁移至云服务器做的一次性提交">
       <created>1569943658022</created>
@@ -145,7 +189,8 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/wechat$diy_menu.coverage" NAME="diy_menu Coverage Results" MODIFIED="1569406956746" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
     <SUITE FILE_PATH="coverage/wechat$CreateSign.coverage" NAME="CreateSign Coverage Results" MODIFIED="1569400594211" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
-    <SUITE FILE_PATH="coverage/wechat$mongodb.coverage" NAME="mongodb Coverage Results" MODIFIED="1569386760905" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
-    <SUITE FILE_PATH="coverage/wechat$wechat.coverage" NAME="wechat Coverage Results" MODIFIED="1569928977375" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/wechat$mongodb.coverage" NAME="mongodb Coverage Results" MODIFIED="1570450739903" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
+    <SUITE FILE_PATH="coverage/wechat$wechat.coverage" NAME="wechat Coverage Results" MODIFIED="1570605341475" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/wechat$demo.coverage" NAME="demo Coverage Results" MODIFIED="1570521672678" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bp" />
   </component>
 </project>

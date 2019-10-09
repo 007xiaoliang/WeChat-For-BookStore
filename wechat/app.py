@@ -5,14 +5,34 @@ from flask import Flask, request, render_template, jsonify, redirect
 import hashlib
 import xmltodict
 
+from bp.bookinfo_bp import book_info_bp
 from utils import reply, CreateSign, diy_menu, mongodb
 from utils.config import APP_ID, ROOTURL, TOKENSTR
 
 app = Flask(__name__)
+# 注册蓝图
+app.register_blueprint(book_info_bp)
+
 # 更新自定义菜单
 diy_menu.Menu().create(diy_menu.getMenu())
 # 创建mongodb连接
 mdb = mongodb.Mongodb()
+
+
+# 自定义过滤器
+def fileter_name(li):
+    if li == "未知":
+        return "随便看看"
+    else:
+        return li
+
+
+def fileter_plus(li):
+    return li.replace("+", "*******")
+
+
+app.add_template_filter(fileter_name)
+app.add_template_filter(fileter_plus)
 
 
 @app.route('/', methods=["GET", "POST"])
@@ -44,26 +64,6 @@ def getinput():
         xml_dict = xmltodict.parse(xml_str)
         xml_dict = xml_dict.get("xml")
         return reply.Reply(xml_dict, mdb).create_content()
-
-
-@app.route('/index', methods=["GET", "POST"], endpoint="index")
-def index_view():
-    if request.method == "GET":
-        # 获取主页面需要的信息
-        # 获取菜单项
-        cate_infos = mdb.search_category()
-        cate_list = []
-        for cate_info in cate_infos:
-            cate_list.append(cate_info)
-        # 获取轮播图信息
-        lunbo_info = mdb.search_lunbo()
-        # 填充主页面信息
-
-        return render_template("index.html", cate_list=cate_list, lunbo_info=lunbo_info)
-    else:
-        local_url = request.values.get("link")
-        appid, timestamp, signature, nonceStr = CreateSign.wx_config(url=local_url)
-        return jsonify({'appid': appid, 'timestamp': timestamp, 'signature': signature, 'nonceStr': nonceStr})
 
 
 @app.route('/get_openid', methods=["GET", "POST"])

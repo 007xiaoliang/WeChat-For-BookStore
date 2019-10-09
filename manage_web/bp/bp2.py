@@ -26,9 +26,9 @@ def sub_html_view():
     book_press = request.values.get("book_press")
     if book_name and book_writer and book_press:
         # 将要修改的书籍信息缓存到redis
-        redis_client.insert("book_name", book_name)
-        redis_client.insert("book_writer", book_writer)
-        redis_client.insert("book_press", book_press)
+        redis_client.insert("book_name"+session['user'], book_name)
+        redis_client.insert("book_writer"+session['user'], book_writer)
+        redis_client.insert("book_press"+session['user'], book_press)
     session['page_id'] = page_id
     with open('templates/sub_html/' + page_id + '.html', encoding='utf8') as f:
         html_content = f.read()

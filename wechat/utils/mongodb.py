@@ -1,7 +1,10 @@
+import random
+
 from pymongo import MongoClient
 
 # 开启linux中mongodb服务： ./mongod -f mongodb.conf
 from utils.config import MONGOIP, MONGOPORT, MONGOUSER, MONGOPWD, SERVER_IP, ROOTURL
+from utils.util import check_image
 
 
 class Mongodb:
@@ -13,9 +16,27 @@ class Mongodb:
         self.collection2 = self.db.category_set  # 操作category_set表
         self.collection3 = self.db.lunbo_set  # 操作lunbo_set表
 
-    # 根据书名查询
-    def search_like(self, keyword):
-        return self.collection1.find({'book_name': {'$regex': keyword}}, {"id": 0})
+    # 计数
+    def count(self):
+        count = self.collection1.count_documents({})
+        return count
+
+    # 根据条件查询一条
+    def search_one(self, condition):
+        return self.collection1.find_one(condition)
+
+    # 随机查询某类型下五条数据
+    def search_one_random(self, query_filter=None):
+        if self.count() >= 5:
+            limit = 5
+            skip = random.randint(0, self.count() - 5)
+        else:
+            skip, limit = self.count()
+        return self.collection1.find(query_filter, {"_id": 0}).limit(limit).skip(skip)
+
+    # 分页查询
+    def query_search(self, query_filter=None, limit=7, skip=1):
+        return self.collection1.find(query_filter, {"_id": 0}).limit(limit).skip((skip - 1) * limit)
 
     # 查询所有分类信息并返回
     def search_category(self):
@@ -30,10 +51,19 @@ class Mongodb:
                 lunbo_list.append(SERVER_IP + value)
         return lunbo_list
 
-    # 关闭连接
-    def close(self):
-        self.conn.close()
+    # 查询展示页面需要的信息
+    def main_search(self):
+        cate_info = []
+        try:
+            for cate in self.search_one_random():
+                cate = check_image(cate)
+                cate_info.append(cate)
+        except Exception as e:
+            print(e)
+            cate_info = ["数据丢失"]
+        finally:
+            return cate_info
 
 
 if __name__ == '__main__':
-    print(Mongodb().search("仙55"))
+    print(Mongodb().main_search())
