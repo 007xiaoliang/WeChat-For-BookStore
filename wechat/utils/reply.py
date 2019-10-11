@@ -63,7 +63,7 @@ class Reply:
                                "book_press"] + "\n<a href='" + ROOTURL + "details?book_name=" + book_name + "&book_writer=" + book_writer + "&book_press=" + book_press + "'>点击了解详情</a>\n*****\n"
                 count += 1
             else:
-                content += "......\n<a href='" + ROOTURL + "search?keyword=" + keyword + "'>查看更多请点击</a>"
+                content += "......\n<a href='" + ROOTURL + "search/name?keyword=" + keyword + "'>查看更多请点击</a>"
                 break
         if flag:
             return "没有查询到与 " + keyword + " 有关的内容"

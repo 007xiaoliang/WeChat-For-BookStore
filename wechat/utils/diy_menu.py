@@ -63,13 +63,8 @@ def getMenu():
                     },
                     {
                         "type": "view",
-                        "name": "畅销热门",
-                        "url": ROOTURL + "search"
-                    },
-                    {
-                        "type": "view",
                         "name": "我的订单",
-                        "url": ROOTURL + "get_openid?state=user"
+                        "url": ROOTURL + "my_order"
                     }
                 ]
             },
@@ -79,7 +74,7 @@ def getMenu():
                     {
                         "type": "view",
                         "name": "留言",
-                        "url": ROOTURL + "get_openid?state=message"
+                        "url": ROOTURL + "message"
                     },
                     {
                         "type": "view",

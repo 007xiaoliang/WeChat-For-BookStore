@@ -28,7 +28,10 @@
 
             //--
             wx.ready(function () {
-
+            {#else: #}
+            {#    local_url = request.values.get("link")#}
+            {#    appid, timestamp, signature, nonceStr = CreateSign.wx_config(url = local_url)#}
+            {#    return jsonify({'appid': appid, 'timestamp': timestamp, 'signature': signature, 'nonceStr': nonceStr})#}
             })
         },
         error: function () {

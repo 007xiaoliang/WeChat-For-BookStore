@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request, render_template
+from flask import Blueprint, jsonify, request, render_template, redirect
 
 # 处理书籍展示
 from utils import CreateSign, mongodb
@@ -25,10 +25,6 @@ def index_view():
         # 填充主页面信息
         main_info = mdb.main_search()
         return render_template("index.html", cate_list=cate_list, lunbo_info=lunbo_info, main_info=main_info)
-    else:
-        local_url = request.values.get("link")
-        appid, timestamp, signature, nonceStr = CreateSign.wx_config(url=local_url)
-        return jsonify({'appid': appid, 'timestamp': timestamp, 'signature': signature, 'nonceStr': nonceStr})
 
 
 # 改变主页面显示内容
@@ -41,22 +37,26 @@ def change_ingo_view():
 # 进入商品详情页
 @book_info_bp.route('/details', methods=["GET", "POST"])
 def details_view():
-    book_name = request.args.get("book_name").replace("*******", "+")
-    book_writer = request.args.get("book_writer").replace("*******", "+")
-    book_press = request.args.get("book_press").replace("*******", "+")
-    # 查询图书详细信息并返回页面
-    condition = {"book_name": book_name, "book_writer": book_writer, "book_press": book_press}
-    book_info = mdb.search_one(condition=condition)
-    book_info = check_image(book_info)
-    book_image = []
-    for k, v in book_info.items():
-        if "book_image" in k:
-            if v != "":
-                if "http" not in v:
-                    book_image.append(SERVER_IP + v)
-                else:
-                    book_image.append(v)
-    return render_template("details.html", book_info=book_info, book_image=book_image)
+    try:
+        book_name = request.args.get("book_name").replace("*******", "+")
+        book_writer = request.args.get("book_writer").replace("*******", "+")
+        book_press = request.args.get("book_press").replace("*******", "+")
+        # 查询图书详细信息并返回页面
+        condition = {"book_name": book_name, "book_writer": book_writer, "book_press": book_press}
+        book_info = mdb.search_one(condition=condition)
+        book_info = check_image(book_info)
+        book_image = []
+        for k, v in book_info.items():
+            if "book_image" in k:
+                if v != "":
+                    if "http" not in v:
+                        book_image.append(SERVER_IP + v)
+                    else:
+                        book_image.append(v)
+        return render_template("details.html", book_info=book_info, book_image=book_image)
+    except Exception as e:
+        print(e)
+        return redirect("https://www.baidu.com")
 
 
 # 进入搜索详情页
@@ -94,4 +94,12 @@ def search_reload_view():
 def search_view():
     keyword = request.values.get("keyword").replace("*******", "+")
     count, info_list = mdb.search_in_keyword(keyword=keyword)
-    return jsonify({"info_list": info_list, "count": count})
+    return jsonify({"info_list": info_list, "count": count, "keyword": keyword})
+
+
+# 进入搜索详情页
+@book_info_bp.route('/search/name', methods=["GET", "POST"])
+def search_name_view():
+    keyword = request.values.get("keyword")
+    count, info_list = mdb.search_in_keyword(keyword=keyword)
+    return render_template("search.html", main_info=info_list, keyword=keyword, count=count)

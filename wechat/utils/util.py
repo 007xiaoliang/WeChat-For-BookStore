@@ -9,3 +9,19 @@ def check_image(cate):
     else:
         cate['book_image1'] = SERVER_IP + "未上传.jpg"
     return cate
+
+
+# 处理用户信息
+def user_handler(user_info, mdb):
+    # 根据openid查询数据库，如果没有相关用户则保存信息，有的话将数据返回
+    user = mdb.search_user(user_info["openid"])
+    if not user:
+        content = {'openid': user_info["openid"],
+                   'nickname': user_info["nickname"],
+                   'sex': user_info["sex"],
+                   'language': user_info["language"],
+                   'city': user_info["city"],
+                   'province': user_info["province"],
+                   'country': user_info["country"],
+                   'headimgurl': user_info["headimgurl"]}
+        mdb.insert_user(content)

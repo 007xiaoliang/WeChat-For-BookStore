@@ -15,6 +15,8 @@ class Mongodb:
         self.collection1 = self.db.book_set  # 操作book_set表
         self.collection2 = self.db.category_set  # 操作category_set表
         self.collection3 = self.db.lunbo_set  # 操作lunbo_set表
+        self.collection4 = self.db.user_set  # 操作user_set表
+        self.collection5 = self.db.message_set  # 操作message_set表(留言表)
 
     # 计数
     def count(self):
@@ -82,6 +84,22 @@ class Mongodb:
             info_list.append(check_image(info))
         return count, info_list
 
+    # 查询user_set表
+    def search_user(self, openid):
+        return self.collection4.find_one({"openid": openid}, {"_id": 0})
+
+    # 插入用户信息
+    def insert_user(self, content):
+        self.collection4.insert_one(content)
+
+    # 查询message_set表
+    def search_message(self, condition):
+        return self.collection5.find_one(condition, {"_id": 0})
+
+    # 插入留言信息
+    def insert_message(self, content):
+        self.collection5.insert_one(content)
+
 
 if __name__ == '__main__':
-    print(Mongodb().search_in_keyword("学"))
+    print(Mongodb().search_user("oXjxxwiTZnOBGxNi2Z5PTMw0Pe5I"))

@@ -2,10 +2,32 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4452d276-2241-423a-99b4-b76b221602fc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../wechat/bp/cart_bp.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wechat/bp/signature_bp.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wechat/templates/address.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wechat/templates/cart.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wechat/templates/link.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wechat/templates/message.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wechat/templates/mine.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wechat/templates/my_order.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wechat/templates/my_order_delivery.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wechat/templates/my_order_pay.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wechat/templates/order.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wechat/templates/order_back.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bp/bp2.py" beforeDir="false" afterPath="$PROJECT_DIR$/bp/bp2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bp/bp3.py" beforeDir="false" afterPath="$PROJECT_DIR$/bp/bp3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/redisUtils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/redisUtils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wechat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../wechat/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wechat/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/../wechat/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wechat/app_copy.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wechat/bp/bookinfo_bp.py" beforeDir="false" afterPath="$PROJECT_DIR$/../wechat/bp/bookinfo_bp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wechat/static/css/application.css" beforeDir="false" afterPath="$PROJECT_DIR$/../wechat/static/css/application.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wechat/templates/details.html" beforeDir="false" afterPath="$PROJECT_DIR$/../wechat/templates/details.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wechat/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../wechat/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wechat/templates/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/../wechat/templates/search.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wechat/templates/temp.html" beforeDir="false" afterPath="$PROJECT_DIR$/../wechat/templates/temp.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wechat/utils/diy_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/../wechat/utils/diy_menu.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wechat/utils/mongodb.py" beforeDir="false" afterPath="$PROJECT_DIR$/../wechat/utils/mongodb.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wechat/utils/reply.py" beforeDir="false" afterPath="$PROJECT_DIR$/../wechat/utils/reply.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wechat/utils/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/../wechat/utils/util.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -50,7 +72,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../wechat" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -175,6 +197,8 @@
       <workItem from="1570188341126" duration="652000" />
       <workItem from="1570289260730" duration="753000" />
       <workItem from="1570360187764" duration="1647000" />
+      <workItem from="1570717274017" duration="73000" />
+      <workItem from="1570771386145" duration="91000" />
     </task>
     <task id="LOCAL-00001" summary="添加manage_web项目中requirements.txt文件">
       <created>1569725223394</created>

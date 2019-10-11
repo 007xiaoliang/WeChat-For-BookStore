@@ -13,6 +13,13 @@
     <title>{{book_info["book_name"]}}</title>
 </head>
 <body>
+<header>
+	<div class="headerbar">
+		<a class="navbar-toggle" onclick="history.back()">
+			<span class="icon-m_goback"></span>
+		</a>
+	</div>
+</header>
 <div class="slide popslides">
     <ul >
         {% for image in book_image %}
@@ -73,14 +80,14 @@
     <div class="row footbar">
         <div class="col-12 text-center">
             <div class="square">
-                <a href="#"><span class="icon-phone"></span>客服</a>
+                <a href="/link"><span class="icon-phone"></span>客服</a>
             </div>
             <div class="square">
-                <a href="cart.html"><span class="icon-cart"></span>购物车<i class="numberpro"></i></a>
+                <a href="/cart"><span class="icon-cart"></span>购物车<i class="numberpro"></i></a>
             </div>
             <div class="btn-group">
                 <a class="btn btn-fade" data-type="popbox" data-href="shoppingcar">加入购物车</a>
-                <a class="btn" href="#">&nbsp;立即购买&nbsp;</a>
+                <a class="btn" href="/order">&nbsp;立即购买&nbsp;</a>
             </div>
         </div>
     </div>

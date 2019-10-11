@@ -13,12 +13,23 @@
     <title></title>
 </head>
 <body>
+<header>
+    <div class="headerbar">
+        <a class="navbar-toggle" href="/index">
+            <span class="icon-m_goback">首页</span>
+        </a>
+    </div>
+</header>
 <div class="searchview"><i class="icon-finder"></i><input type="text"><a class="btn-search" onclick="search_keyword();">搜索</a>
 </div>
 <div class="mmenu-page">
     <section>
         <div class="category">
-            <h2><strong style="color: #4b78e6">{{ book_type1|fileter_name }}&emsp;{{ book_type2 }}</strong></h2>
+            {% if book_type1 %}
+                <h2><strong style="color: #4b78e6">{{ book_type1|fileter_name }}&emsp;{{ book_type2 }}</strong></h2>
+            {% else %}
+                <small style='color:gray'>为您找到{{ count }}条与&nbsp;{{ keyword }}&nbsp;相关信息</small>
+            {% endif %}
             {% for main in main_info %}
                 <div class="thumbnail">
                     <a href="/details?book_name={{ main["book_name"]|fileter_plus }}&book_writer={{ main["book_writer"]|fileter_plus }}&book_press={{ main["book_press"]|fileter_plus }}">
@@ -40,9 +51,9 @@
     <footer>
         <div class="footheight"></div>
         <div class="row footbar">
-            <a class="col-4 text-center active" href="#"><span class="icon-home"></span>首页</a>
-            <a class="col-4 text-center" href="#"><span class="icon-cart2"></span>购物车</a>
-            <a class="col-4 text-center" href="#"><span class="icon-user2"></span>我的必要</a>
+            <a class="col-4 text-center active"><span class="icon-home"></span>首页</a>
+            <a class="col-4 text-center" href="/cart"><span class="icon-cart2"></span>购物车</a>
+            <a class="col-4 text-center" href="/mine"><span class="icon-user2"></span>我的</a>
         </div>
     </footer>
 </div>
@@ -62,7 +73,7 @@
                 var scrollTop = $(this).scrollTop();
                 var scrollHeight = $(document).height();
                 var windowHeight = $(this).height();
-                if ((scrollTop + windowHeight) / scrollHeight==1) {
+                if ((scrollTop + windowHeight) / scrollHeight == 1) {
                     pageid++
                     //滚动条到底动态加载数据
                     $.ajax({
@@ -157,8 +168,9 @@
                 success: function (data) {
                     const count = data["count"]
                     const main_info = data["info_list"]
+                    const keyword = data["keyword"]
                     $(".category").text("")
-                    $(".category").append("<small style='color:gray'>为您找到相关信息" + count + "条</>")
+                    $(".category").append("<small style='color:gray'>为您找到" + count + "条与&nbsp;"+keyword+"&nbsp;相关信息</>")
                     for (i = 0; i < main_info.length; i++) {
                         book_name = main_info[i]["book_name"].replace(reg, "*******")
                         book_writer = main_info[i]["book_writer"].replace(reg, "*******")
