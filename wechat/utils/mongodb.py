@@ -17,6 +17,9 @@ class Mongodb:
         self.collection3 = self.db.lunbo_set  # 操作lunbo_set表
         self.collection4 = self.db.user_set  # 操作user_set表
         self.collection5 = self.db.message_set  # 操作message_set表(留言表)
+        self.collection6 = self.db.cart_set  # 操作cart_set表(购物车表)
+        self.collection7 = self.db.address_set  # 操作address_set表(地址表)
+        self.collection8 = self.db.order_set  # 操作order_set表(订单表，分为(未付款/0，已付款/1，配送中/2，已完成/3)几种状态)
 
     # 计数
     def count(self):
@@ -29,7 +32,7 @@ class Mongodb:
 
     # 根据条件查询一条
     def search_one(self, condition):
-        return self.collection1.find_one(condition)
+        return self.collection1.find_one(condition, {"_id": 0})
 
     # 随机查询某类型下五条数据
     def search_one_random(self, query_filter=None):
@@ -100,6 +103,67 @@ class Mongodb:
     def insert_message(self, content):
         self.collection5.insert_one(content)
 
+    # 查询cart_set表一条
+    def search_cart(self, condition):
+        return self.collection6.find_one(condition, {"_id": 0})
+
+    # 查询cart_set表多条
+    def search_carts(self, condition):
+        return self.collection6.find(condition)
+
+    # 插入cart信息
+    def insert_cart(self, content):
+        self.collection6.insert_one(content)
+
+    # 更新cart数据
+    def update_cart(self, condition, edit):
+        self.collection6.update_one(condition, {'$set': edit})
+
+    # 删除购物车一条数据
+    def delete_cart_one(self, condition):
+        self.collection6.delete_one(condition)
+
+    # 删除购物车多条数据
+    def delete_cart_many(self, condition):
+        self.collection6.delete_many(condition)
+
+    # 查询address_set表一条
+    def search_address(self, condition):
+        return self.collection7.find_one(condition)
+
+    # 查询address_set表多条
+    def search_addresses(self, condition):
+        return self.collection7.find(condition)
+
+    # 插入address信息
+    def insert_address(self, content):
+        self.collection7.insert_one(content)
+
+    # 更新address数据
+    def update_address(self, condition, edit):
+        self.collection7.update_one(condition, {'$set': edit})
+
+    # 删除address一条数据
+    def delete_address_one(self, condition):
+        self.collection7.delete_one(condition)
+
+    # 计数
+    def address_count(self):
+        count = self.collection7.count_documents({})
+        return count
+
+    # 插入订单表信息
+    def insert_order(self, content):
+        self.collection8.insert_one(content)
+
+    # 删除订单一条数据
+    def delete_order_one(self, condition):
+        self.collection8.delete_one(condition)
+
+    # 查询order_set表多条
+    def search_orders(self, condition):
+        return self.collection8.find(condition)
+
 
 if __name__ == '__main__':
-    print(Mongodb().search_user("oXjxxwiTZnOBGxNi2Z5PTMw0Pe5I"))
+    print(Mongodb().delete_cart_one({"_id":"5da1e2fa91ed8bc750660bd5","openid": "oXjxxwiTZnOBGxNi2Z5PTMw0Pe5I"}))

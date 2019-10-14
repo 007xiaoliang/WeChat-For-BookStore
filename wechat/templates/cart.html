@@ -23,42 +23,35 @@
 </header>
 
 <div class="medialist">
-    <div class="medialist-header clearfix">
-        <div class="icheck pull-left"><input type="checkbox" name="checkall" class="iradio checkall" id="checkall">
-        </div>&nbsp;&nbsp;<label for="checkall">全选</label>
-        <a class="pull-right" onclick="emptycart()">清空</a>
-    </div>
-    <div class="media">
-        <div class="icheck"><input type="checkbox" name="iCheck" class="iradio"></div>
-        <a class="productimg thumbnail"><img src="http://www.placehold.it/128x128/EFEFEF/AAAAAA" width="128"></a>
-        <div class="media-body">
-            <h4><span>产品名称名称产品</span></h4>
-            <div class="spinnersbox">
-                <input type="number" class="spinners" value="0"/>
+    {% if cart_list| length==0 %}
+        <section class='waitingwrapper'>
+            <div class='text-center purple' style='font-size:5rem'><span class='icon-cart'></span></div>
+            <p class='text-center'>购物车为空</p></section>
+    {% else %}
+        <div class="medialist-header clearfix">
+            <div class="icheck pull-left"><input type="checkbox" name="checkall" class="iradio checkall" id="checkall">
+            </div>&nbsp;&nbsp;<label for="checkall">全选</label>
+            <a class="pull-right" onclick="emptycart()">清空</a>
+        </div>
+        {% for cart in cart_list %}
+            <div class="media" id="{{ cart["_id"] }}" name="{{ cart["book_name"] }}&${{ cart["book_writer"] }}&${{ cart["book_press"] }}">
+                <div class="icheck"><input type="checkbox" name="iCheck" class="iradio"></div>
+                <a class="productimg thumbnail"><img src="{{ cart["book_image1"] }}" width="128"></a>
+                <div class="media-body" style="width: 55%">
+                    <h5><span>{{ cart["book_name"] }}</span></h5>
+                    <div class="spinnersbox">
+                        <input type="number" class="spinners" value="{{ cart["count"] }}"/>
+                    </div>
+                    <p><span class="prices" data-value="{{ cart["book_price"] }}">￥{{ cart["book_price"] }}</span></p>
+                </div>
+                <div class="showbtn-group">
+                    <a class="btn-del"><i class="icon-delete"></i></a>
+                </div>
             </div>
-            <p><span class="prices" data-value="200">￥200</span></p>
-        </div>
-        <div class="showbtn-group">
-            <a class="btn-del"><i class="icon-delete"></i></a>
-        </div>
-    </div>
-    <div class="media">
-        <div class="icheck"><input type="checkbox" name="iCheck" class="iradio"></div>
-        <a class="productimg thumbnail"><img src="http://www.placehold.it/128x128/EFEFEF/AAAAAA" width="128"></a>
-        <div class="media-body">
-            <h4><span>产品名称名称产品</span></h4>
-            <div class="spinnersbox">
-                <input type="number" class="spinners" value="0"/>
-            </div>
-            <p><span class="prices" data-value="200">￥200</span></p>
-        </div>
-        <div class="showbtn-group">
-            <a class="btn-del"><i class="icon-delete"></i></a>
-        </div>
-    </div>
+        {% endfor %}
+
+    {% endif %}
 </div>
-
-
 <footer>
     <div class="footheight"></div>
     <div class="row footbar">
@@ -66,7 +59,7 @@
             <div class="icheck pull-left"><input type="checkbox" name="checkall" class="iradio checkall" id="checkall2">
             </div>&nbsp;&nbsp;<label for="checkall2">全选</label>&nbsp;&nbsp;
             <label>合计：<span class="prices total"> </span></label>
-            <a class="pull-right btn" href="my_order.html">结算</a>
+            <a class="pull-right btn" onclick="settleAccount();">结算</a>
         </div>
         <a class="col-4 text-center" href="/index"><span class="icon-home"></span>首页</a>
         <a class="col-4 text-center active"><span class="icon-cart2"></span>购物车</a>
@@ -81,31 +74,49 @@
 <script src="{{ url_for('static', filename='js/application.js') }}" type="text/javascript"></script>
 <script src="{{ url_for('static', filename='js/icheck.min.js') }}" type="text/javascript"></script>
 <script>
-    var price = function () {
+    function price() {
         var sp = 0;
         $(".media").each(function () {
             var obj = $(this);
             var state = obj.find(":checkbox")[0].checked;
             if (state) {
-                sp = sp + parseInt(obj.find(".spinners").val()) * parseInt(obj.find(".prices").attr("data-value"))
+                sp = sp + parseFloat(obj.find(".spinners").val()) * parseFloat(obj.find(".prices").attr("data-value"))
             }
         })
-        $(".total").html("￥" + sp)
+        $(".total").html("￥" + sp.toFixed(2))
     }
 
     //空的购物车
-    var emptycart = function () {
-        $(".billing").remove();
-        $(".medialist").html("<section class='waitingwrapper'><div class='text-center purple' style='font-size:5rem'><span class='icon-cart'></span></div><p class='text-center' >购物车为空</p></section>")
+    function emptycart() {
+        swal({
+            title: "确定清空吗?",
+            text: "此操作将清空购物车并且不可恢复",
+            showCancelButton: true,
+        }, function () {
+            //从数据库删除所有购物车信息
+            $.ajax({
+                url: "/cart/remove",
+                type: "POST",
+                dataType: "json",
+                async: true,
+                success: function () {
+                    $(".billing").remove();
+                    $(".medialist").html("<section class='waitingwrapper'><div class='text-center purple' style='font-size:5rem'><span class='icon-cart'></span></div><p class='text-center' >购物车为空</p></section>")
+                },
+                error: function () {
+                    swal("失败", "数据异常，稍后再试！", "error");
+                }
+            });
+        })
     }
 
     $(function () {
         $('input:checkbox').iCheck({
             checkboxClass: 'iradio_square-purple',
-            increaseArea: '50%' // optional
+            increaseArea: '50%'
         });
 
-        $('.spinners').spinner({max: 5});
+        $('.spinners').spinner({max: 1000});
 
         //全选
         $("#checkall2,#checkall").on('ifChanged', function (event) {
@@ -122,18 +133,81 @@
 
         $(".btn-del").on('click', function () {
             if ($(".media").length == 1) {
-                emptycart();
+                $(".billing").remove();
+                $(".medialist").html("<section class='waitingwrapper'><div class='text-center purple' style='font-size:5rem'><span class='icon-cart'></span></div><p class='text-center' >购物车为空</p></section>")
             } else {
                 $(this).closest(".media").remove();
                 price();
             }
+            //发送ajax从数据库删除此条信息
+            params = $(this).parent().parent().attr("name").split("&$")
+            $.ajax({
+                url: "/cart/remove",
+                type: "GET",
+                dataType: "json",
+                async: true,
+                data: {
+                    "book_name": params[0],
+                    "book_writer": params[1],
+                    "book_press": params[2]
+                },
+                error: function () {
+                    swal("失败", "数据异常，稍后再试！", "error");
+                }
+            });
 
-            //购物车移除操作
-            //  //  //  //
+
         })
-
+        setTimeout(function () {
+            $("button").click(function () {
+                cou = $(this).parent().children("input").val()
+                params = $(this).parent().parent().parent().parent().attr("name").split("&$")
+                $.ajax({
+                    url: "/cart",
+                    type: "POST",
+                    dataType: "json",
+                    async: true,
+                    data: {
+                        "book_name": params[0],
+                        "book_writer": params[1],
+                        "book_press": params[2],
+                        "count": cou
+                    },
+                    error: function () {
+                        swal("失败", "数据异常，稍后再试！", "error");
+                    }
+                });
+            })
+        }, 500);
 
     })
+
+    //结算
+    function settleAccount() {
+        st = ""
+        $(".media").each(function () {
+            var obj = $(this);
+            var state = obj.find(":checkbox")[0].checked;
+            if (state) {
+                s = $(obj).attr("name") + "&$" + $(obj.children("a")[0]).children("img").attr("src") + "&$" + $($(obj.children()[2]).children("div")[0]).children("div").children("input").val() + "&$" + $($(obj.children()[2]).children()[2]).children("span").attr("data-value")+"&$"+$(obj).attr("id")
+                st += s + "&&&&"
+            }
+        })
+        if (st != "") {
+            var form = $("<form method='post'></form>");
+            form.attr({"action": "/order"});
+            var input = $("<input type='hidden'>");
+            input.attr({"name": "list"});
+            input.val(st);
+            form.append(input);
+            $("body").append(form)
+            form.submit();
+        } else {
+            swal("提示", "没有商品被选中", "warning")
+        }
+
+
+    }
 
 </script>
 </body>

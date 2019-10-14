@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="user-scalable=no,width=device-width,initial-scale=1,maximum-scale=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <link href="{{ url_for('static', filename='css/sweetalert.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/application.css') }}" rel="stylesheet">
+    <title>付款</title>
+</head>
+<body>
+<header>
+    <div class="headerbar">
+        <h1>在线付款</h1>
+        <a class="navbar-toggle" onclick="history.back()">
+            <span class="icon-m_goback"></span>
+        </a>
+    </div>
+</header>
+<section class="wrapper cart">
+    <div class="row celltel">
+        <div class="col-4 text-right">
+            <span class="icon-chengnuo"></span>
+        </div>
+        <div class="col-8">
+            <span class="purple">订单提交成功！马上付款~</span><br/>
+            请尽快完成支付
+        </div>
+    </div>
+    <div class="shelves">
+        <div class="row" style="padding:1rem 1rem; line-height:1.6rem;">
+            <label class="col-3 text-right">订单编号：</label>
+            <div class="col-9"><span class="vipcolor">{{ order_code }}</span></div>
+            <label class="col-3 text-right">应付金额：</label>
+            <div class="col-9"><span class="vipcolor">￥{{ price }}</span></div>
+            <label class="col-3 text-right">收货信息：</label>
+            <div class="col-9">{{ address["a_name"] }}&nbsp; {{ address["a_phone"] }}<br/>
+                {{ address["province"] }}{{ address["city"] }}{{ address["district"] }}{{ address["a_address"] }}
+            </div>
+        </div>
+        <p class="tips tipssmall">支付方式(目前暂支持微信支付)</p>
+        <div>
+            <div class="pay"><i class="payu"></i>微信支付
+                <a class="fulldom" data-type="popbox" data-href="weichat"></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--微信弹出框-->
+<section class="popbox" id="weichat">
+    <div class="fx_dl">
+        <div class="fwsm_t">微信支付</div>
+        <div class="text-center paybox">
+            <p>微信账号：29409020402000</p>
+            <div class="thumbnail">
+                <img src="http://fakeimg.pl/320x320/ccc/fff/?text=Qrcode"/>
+            </div>
+            <span class="tipssmall">请添加商家微信并完成付款</span>
+        </div>
+        <div class="buttonzone">
+            <button class="btn btn-block" data-dismiss="popbox">关闭</button>
+        </div>
+    </div>
+</section>
+<script src="{{ url_for('static', filename='js/jquery.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='js/swipeSlide.min.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='js/sweetalert.min.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='js/jquery.mmenu.min.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='js/jquery.touchSwipe.min.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='js/application.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='js/icheck.min.js') }}" type="text/javascript"></script>
+<script>
+
+</script>
+</body>
+</html>

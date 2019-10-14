@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="user-scalable=no,width=device-width,initial-scale=1,maximum-scale=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <link href="{{ url_for('static', filename='css/sweetalert.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/application.css') }}" rel="stylesheet">
+    <title>地址表单</title>
+</head>
+<body>
+<header>
+    <div class="headerbar">
+        <h1>{% if address=="" %}
+            新增地址{% else %}编辑地址
+        {% endif %}</h1>
+        <a class="navbar-toggle" onclick="history.back()">
+            <span class="icon-m_goback"></span>
+        </a>
+    </div>
+</header>
+<form class="form-phone">
+    <section class="wrapper cart">
+        <div class="shelves">
+            <div>
+                <label>收货人姓名</label>
+                <input type="text" class="forminput" placeholder="请输入姓名" name="a_name"
+                       value="{{ address["a_name"] or "" }}">
+                <i class="icon-edit"></i>
+            </div>
+            <div>
+                <label>手机号码</label>
+                <input type="text" class="forminput" placeholder="请输入手机号" name="a_phone"
+                       value="{{ address["a_phone"] or "" }}">
+                <i class="icon-edit"></i>
+            </div>
+            <div>
+                <label>邮政编码</label>
+                <input type="text" class="forminput" placeholder="请输入邮政编码" name="a_postcode"
+                       value="{{ address["a_postcode"] or "" }}">
+                <i class="icon-edit"></i>
+            </div>
+            <div class="clearfix">
+                <label>省、市、区</label>
+                <div class="form-a">请选择</div>
+                <input type="hidden" class="forminput" name="province" value="{{ address["province"] or "" }}">
+                <input type="hidden" class="forminput" name="city" value="{{ address["city"] or "" }}">
+                <input type="hidden" class="forminput" name="district" value="{{ address["district"] or "" }}">
+                <i class="icon-down_arrow selecticon"></i>
+            </div>
+
+            <div>
+                <textarea rows="4" placeholder="输入详细地址" name="a_address">{{ address["a_address"] or "" }}</textarea>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="footheight"></div>
+        <div class="footbar" style="padding:0;">
+            <a class="btn btn-block" id="addressadd">完成</a>
+        </div>
+    </footer>
+
+    <div class="citylist">
+        <ul class="prov"></ul>
+        <ul class="city"></ul>
+        <ul class="dist"></ul>
+    </div>
+    <input type="hidden" name="a_id" value="{{ address["_id"] or "" }}">
+</form>
+<script src="{{ url_for('static', filename='js/jquery.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='js/swipeSlide.min.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='js/sweetalert.min.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='js/jquery.mmenu.min.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='js/jquery.touchSwipe.min.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='js/application.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='js/icheck.min.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='js/cityinit.js') }}" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        $(".form-a").on('click', function () {
+            $(".citylist").show();
+        })
+        $(".form-a").cityChoose({
+            prov: '{{ address["province"] or "北京" }}',
+            city: '{{ address["city"] or "朝阳区" }}',
+            dist: '{{ address["district"] or "" }}',
+            nodata: "none"
+        });
+        $("#addressadd").on('click', function () {
+            var formData = new FormData($('.form-phone')[0]);
+            a_name = $("input:eq(0)").val().trim()
+            a_phone = $("input:eq(1)").val().trim()
+            a_postcode = $("input:eq(2)").val().trim()
+            a_address = $("textarea:eq(0)").val().trim()
+            //验证表单
+            if (a_name != "" && a_phone != "" && a_postcode != "" && a_address != "") {
+                if (isPhoneNo(a_phone)) {
+                    if (isPostCo(a_postcode)) {
+                        $.ajax({
+                            type: "POST",
+                            dataType: "json",
+                            url: "/address/form",
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success: function (data) {
+                                if (data["info"] == "ok") {
+                                    window.location.href="/address"
+                                }
+                            },
+                            error: function () {
+                                swal("错误", "数据异常，请稍后再试！", "error");
+                            }
+                        });
+                    } else {
+                        swal("提示", "邮编格式错误！", "warning");
+                    }
+                } else {
+                    swal("提示", "手机格式错误！", "warning");
+                }
+            } else {
+                swal("提示", "提交数据不完整！", "warning");
+            }
+
+            //提交成功执行
+            /*$("#result").attr("data-state",true)
+            $("#result").prepend('<div><ul><li><label>姓名：</label>新加</li><li>'
+                        +'<label>手机：</label>13309877890'
+                        +'<label class="postcode">邮编：</label>098909</li>'
+                      +'<li><label>地址：</label>上海 上海市 浦东新区 成慧路098</li>'
+                        +'</ul>'
+                        +'<div class="hidebtn-group">'
+                        +'<a class="btn-edit" href="address-form.html"><i>编辑</i></a>'
+                        +'<a class="btn-del"><i>删除</i></a>'
+                        +'</div></div>');*/
+        })
+    });
+
+    // 验证手机号
+    function isPhoneNo(phone) {
+        const pattern = /^1[34578]\d{9}$/;
+        return pattern.test(phone);
+    }
+
+    // 验证邮编
+    function isPostCo(code) {
+        const pattern = /^[1-9][0-9]{5}$/;
+        return pattern.test(code);
+    }
+
+</script>
+
+</body>
+</html>

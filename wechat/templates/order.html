@@ -24,37 +24,50 @@
 </header>
 <div>
     <div class="address">
-        <!--<div class="text-center">
-            <a class="addnew">+  添加新的收货地址</a>
-        </div>-->
-        <ul>
-            <li><label>姓名：</label>秘密</li>
-            <li>
-                <label>手机：</label>13309877890
-                <label class="postcode">邮编：</label>098909
-            </li>
-            <li><label>地址：</label>上海 上海市 浦东新区 成慧路098弄12#0989</li>
-        </ul>
-        <a class="fulldom" onclick="popaddress()"></a>
+        {% if address_list|length !=0 and active_address!="" %}
+            <ul id="{{ active_address["_id"] }}">
+                <li><label>姓名：</label>{{ active_address["a_name"] }}</li>
+                <li>
+                    <label>手机：</label>{{ active_address["a_phone"] }}
+                    <label class="postcode">邮编：</label>{{ active_address["a_postcode"] }}
+                </li>
+                <li>
+                    <label>地址：</label>{{ active_address["province"] }}&nbsp;{{ active_address["city"] }}&nbsp;{{ active_address["district"] }}&nbsp;{{ active_address["a_address"] }}
+                </li>
+            </ul>
+            <a class="fulldom" onclick="popaddress()"></a>
+        {% else %}
+            <div class="text-center">
+                <a class="addnew" onclick="window.location.href='/address/form'">+ 添加新的收货地址</a>
+            </div>
+        {% endif %}
     </div>
 </div>
 <section class="describe cart">
     <div class="shelves">
-        <div class="shop-title">
-            商铺名称
-        </div>
-        <div class="media clearfix">
-            <div class="media-left">
-                <img src="http://fakeimg.pl/120x120/eee/fff/?text=LOGO"/>
-            </div>
-            <div class="media-body">
-                <h2>产品名称产品名称产品名称</h2>
-                <p>规格："XL"、"蓝色"</p>
-                <div class="vipcolor">
-                    <span>￥800</span>
+        {% for book in book_list %}
+            <div class="media clearfix">
+                <div class="media-left">
+                    <img src="{{ book["book_image1"] }}"/>
+                </div>
+                <div class="media-body" id="{{ book["cart_id"] or "" }}">
+                    <h2>{{ book["book_name"] |fileter_char }}</h2>
+                    <p>{{ book["book_writer"]|fileter_char }}</p>
+                    <p>{{ book["book_press"]|fileter_char }}</p>
+                    <div class="vipcolor">
+                        <span>￥{{ book["book_price"] }}</span>
+                    </div>
                 </div>
             </div>
-        </div>
+            <div class="number clearfix">
+                购买数量：
+                <input type="text" class="spinners" data-min="1" data-max="24"
+                       name="{{ book["book_price"] }}" value="{{ book["book_count"] or "1" }}" maxlength="4"
+                       onchange="countPrice();">
+            </div>
+
+        {% endfor %}
+
         <div>
             配送费用<p class="pull-right">卖家承担</p>
         </div>
@@ -63,7 +76,8 @@
             <textarea rows="2" placeholder="输入用户留言"></textarea>
         </div>
         <div class="clearfix">
-            <p class="pull-right">共计 <span>2</span> 件商品合计 <span class="vipcolor">￥200</span></p>
+            <p class="pull-right">共计 <span id="total_num"></span> 件商品合计 <span class="vipcolor"
+                                                                              id="count_price"></span></p>
         </div>
     </div>
 </section>
@@ -72,7 +86,8 @@
     <div class="footheight"></div>
     <div class="row footbar btnfull">
         <div class="clearfix">
-            <label style="margin:0.5rem 1rem; float:left;">实付款：<span class="prices">￥200</span></label>
+            <label style="margin:0.5rem 1rem; float:left;">实付款：<span
+                    class="prices"></span></label>
             <a class="pull-right btn btn-orange" id="buy">提交订单</a>
         </div>
     </div>
@@ -81,37 +96,27 @@
 
 <div class="addresslists fixedpage"
      style=" top:4rem; z-index:10001; padding-bottom:0; overflow-y:scroll; display:none;">
-    <div>
-        <ul class="active">
-            <li><label>姓名：</label>秘密</li>
-            <li>
-                <label>手机：</label>13309877890
-                <label class="postcode">邮编：</label>098909
-            </li>
-            <li><label>地址：</label>上海 上海市 浦东新区 成2路098</li>
-        </ul>
-        <div class="hidebtn-group">
-            <a class="btn-edit" href="address-form.html"><i>编辑</i></a>
-            <a class="btn-del"><i>删除</i></a>
+    {% for address in address_list %}
+        <div>
+            <ul class="{{ address["active"] }}" id="{{ address["_id"] }}">
+                <li><label>姓名：</label>{{ address["a_name"] }}</li>
+                <li>
+                    <label>手机：</label>{{ address["a_phone"] }}
+                    <label class="postcode">邮编：</label>{{ address["a_postcode"] }}
+                </li>
+                <li>
+                    <label>地址：</label>{{ address["province"] }}&nbsp;{{ address["city"] }}&nbsp;{{ address["district"] }}&nbsp;{{ address["a_address"] }}
+                </li>
+            </ul>
+            <div class="hidebtn-group">
+                <a class="btn-edit" href="/address/form?a_id={{ address["_id"] }}"><i>编辑</i></a>
+                <a class="btn-del" href="/address/delete?a_id={{ address["_id"] }}"><i>删除</i></a>
+            </div>
         </div>
-    </div>
-    <div>
-        <ul>
-            <li><label>姓名：</label>李四</li>
-            <li>
-                <label>手机：</label>13309877890
-                <label class="postcode">邮编：</label>098909
-            </li>
-            <li><label>地址：</label>上海 上海市 浦东新区 成慧路098</li>
-        </ul>
-        <div class="hidebtn-group">
-            <a class="btn-edit" href="address-form.html"><i>编辑</i></a>
-            <a class="btn-del"><i>删除</i></a>
-        </div>
-    </div>
+    {% endfor %}
     <section class="abssection clearfix" style="bottom:54px; z-index:10001;">
         <div class="text-center">
-            <a class="addnew" onclick="window.location.href='address-form.html'">+ 添加收货地址</a>
+            <a class="addnew" onclick="window.location.href='/address/form'">+ 添加收货地址</a>
         </div>
     </section>
     <section><br/><br/><br/><br/><br/></section>
@@ -126,34 +131,56 @@
 <script src="{{ url_for('static', filename='js/jquery.touchSwipe.min.js') }}" type="text/javascript"></script>
 <script src="{{ url_for('static', filename='js/application.js') }}" type="text/javascript"></script>
 <script>
+    $(function () {
+        countPrice();
+        setTimeout(function () {
+            $("button").click(function () {
+                countPrice();
+            })
+        }, 500);
+    })
+
     function popaddress() {
         $(".addresslists").show();
     }
 
     $(function () {
-        //swal("成功", "这个窗口成功弹出");
-        //swal("失败", "这个窗口成功弹出", "error");
-
+        //如果没有地址则不能提交
         $("#buy").on('click', function () {
-            swal({
-                title: "请确认无误购买？",
-                text: "此处为提示框",
-                confirmButtonText: "确定",
-                cancelButtonText: "取消",
-                showCancelButton: true,
-            }, function () {
-                //swal("失败", "这个窗口弹出", "error");
-                window.location.href = 'pay.html'
-            })
-            /*swal({
-                title: "确定删除吗?",
-                text: "Your will not be able to recover this imaginary file!",
-                type: "success",
-                showCancelButton: true,
-            },function(){
-                //swal("失败", "这个窗口弹出", "error");
-                window.location.href='pay.html'
-            })*/
+            if ($(".text-center").length == 1) {
+                swal({
+                    title: "请确认无误购买？",
+                    text: "此处为提示框",
+                    confirmButtonText: "确定",
+                    cancelButtonText: "取消",
+                    showCancelButton: true,
+                }, function () {
+                    //获取要传递的参数，商品信息和地址信息
+                    address_info = $(".active").attr("id")
+                    message = $("textarea").val()
+                    order_list = []
+                    num1 = 0
+                    reg = /\+/g
+                    $(".media-body").each(function () {
+                        book_dict = {}
+                        book_dict["book_image"]=$($(this).parent().children()[0]).children("img").attr("src")
+                        book_dict["book_name"] = $(this).children("h2").text().replace(reg, "*******")
+                        book_dict["book_writer"] = $($(this).children("p")[0]).text().replace(reg, "*******")
+                        book_dict["book_press"] = $($(this).children("p")[1]).text().replace(reg, "*******")
+                        book_dict["cart_id"] = $(this).attr("id")
+                        order_list[num1] = book_dict
+                        num1++
+                    });
+                    num2 = 0
+                    $(".spinners").each(function () {
+                        order_list[num2]["book_count"] = $(this).val()
+                        num2++
+                    })
+                    window.location.href = '/pay?submit=True&message='+message+'&address_info=' + address_info + '&book_info=' + JSON.stringify(order_list)
+                })
+            } else {
+                swal("提示", "必须选择或创建一个订单地址", "warning")
+            }
         })
 
         $(".addresslists>div").swipe({
@@ -165,11 +192,23 @@
                 $(".address ul").html(address);
             }
         })
-
         $('.spinners').spinner();
-
-
     })
+
+    function countPrice() {
+        num = 0
+        total_price = 0
+        $(".spinners").each(function () {
+            count = parseInt($(this).val())
+            per_price = parseFloat($(this).attr("name"))
+            total_price += count * per_price
+            num++
+        })
+        $("#count_price").html("￥" + total_price.toFixed(2))
+        $(".prices").html("￥" + total_price.toFixed(2))
+        $("#total_num").html(num)
+    }
+
 </script>
 </body>
 </html>

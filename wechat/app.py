@@ -38,8 +38,42 @@ def fileter_plus(li):
     return li.replace("+", "*******")
 
 
+def fileter_char(li):
+    return li.replace("&lt;", "<").replace("&gt;", ">")
+
+
+def filter_data(li):
+    return li[0:4] + "-" + li[4:6] + "-" + li[6:8]
+
+
+def filter_status(li):
+    if li == 0:
+        return "未支付"
+    elif li == 1:
+        return "已支付"
+    elif li == 2:
+        return "配送中"
+    elif li == 3:
+        return "已完成"
+
+
+def filter_status1(li):
+    if li == 0:
+        return "red"
+    elif li == 1:
+        return "green"
+    elif li == 2:
+        return "red"
+    elif li == 3:
+        return "green"
+
+
 app.add_template_filter(fileter_name)
 app.add_template_filter(fileter_plus)
+app.add_template_filter(fileter_char)
+app.add_template_filter(filter_data)
+app.add_template_filter(filter_status)
+app.add_template_filter(filter_status1)
 
 
 # 对所有请求进行拦截与预处理
