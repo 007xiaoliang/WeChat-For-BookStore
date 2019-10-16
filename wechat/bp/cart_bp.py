@@ -4,6 +4,7 @@ from flask import Blueprint, request, render_template, jsonify, session
 from utils import mongodb
 
 # 购物车
+from utils.sendEmial import sentemail
 from utils.util import check_image, get_order_code
 
 cart_bp = Blueprint('cart_blueprint', __name__)
@@ -109,7 +110,7 @@ def order_view():
                                address_list=address_list)
 
 
-# 付款
+# 生成订单
 @cart_bp.route('/pay', methods=["GET", "POST"])
 def pay_view():
     if request.method == "GET":
@@ -151,4 +152,6 @@ def pay_view():
                        "order_price": total_price,
                        "order_image": book_info[0]["book_image"]}
             mdb.insert_order(content=content)
+            # 发送邮件给后台管理人员有新订单（由于微信支付测试功能受限，在此处即认为下单成功，实际调用方法为支付成功后）
+            sentemail(order_code)
         return render_template("pay.html", address=address, price=total_price, order_code=order_code)

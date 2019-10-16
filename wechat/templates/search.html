@@ -156,8 +156,7 @@
 
     function search_keyword() {
         //获取输入框内容
-        reg = /\+/g
-        keyword = $("input:eq(0)").val().trim().replace(reg, "*******")
+        keyword = $("input:eq(0)").val().trim()
         if (keyword != "") {
             $.ajax({
                 url: "/search",

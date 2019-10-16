@@ -130,7 +130,7 @@ def link_view():
 @signature_bp.route('/my_order_pay', methods=["GET", "POST"])
 def my_order_pay_view():
     if request.method == "GET":
-        orders = mdb.search_orders({"order_openid": session["openid"], "order_status": "0"})
+        orders = mdb.search_orders({"order_openid": session["openid"], "order_status": 0})
         order_list = []
         for order in orders:
             order_list.append(order)
@@ -141,7 +141,7 @@ def my_order_pay_view():
 @signature_bp.route('/my_order_delivery', methods=["GET", "POST"])
 def my_order_delivery_view():
     if request.method == "GET":
-        orders = mdb.search_orders({"order_openid": session["openid"], "order_status": "2"})
+        orders = mdb.search_orders({"order_openid": session["openid"], "order_status": 2})
         order_list = []
         for order in orders:
             order_list.append(order)

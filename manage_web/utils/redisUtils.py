@@ -6,7 +6,7 @@ from utils.config import LINUXIP
 
 class RedisClient:
     def __init__(self):
-        self.r = redis.Redis(host='122.51.13.2', port=6379, db=2)  # 创建redis对象,使用redis第二个数据库
+        self.r = redis.Redis(host=LINUXIP, port=6379, db=2)  # 创建redis对象,使用redis第二个数据库
 
     # 插入数据
     def insert(self, key, value):
@@ -21,5 +21,5 @@ class RedisClient:
         self.r.delete(key)
 
 
-if __name__ == '__main__':
-    RedisClient().insert("haha", "1234")
+if __name__ == '__main__':  # ./sunny --clientid=170302220842
+    print(RedisClient().search("haha"))

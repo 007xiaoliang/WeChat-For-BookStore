@@ -23,7 +23,7 @@ LINUXP = "123456"
 # mysql数据库配置信息
 DBUSER = 'root'
 DBPASSWORD = 'root'
-DBHOST = LINUXIP
+DBHOST = "117.48.205.92"
 DBPORT = '3306'
 DB = 'weChat'
 # mongodb数据库配置信息

@@ -23,7 +23,8 @@
                     <ul>
                         {% for k,v in cate.items() %}
                             {% if k!="1" %}
-                                <li><a href="/search/type?book_type1={{cate["1"]}}&book_type2={{ v }}">{{ v }}</a></li>
+                                <li><a href="/search/type?book_type1={{ cate["1"] }}&book_type2={{ v }}">{{ v }}</a>
+                                </li>
                             {% endif %}
                         {% endfor %}
                     </ul>
@@ -56,9 +57,13 @@
             {% endfor %}
         </div>
     </div>
+    <div class="searchview"><i class="icon-finder"></i><input type="text"><a class="btn-search"
+                                                                             onclick="search_keyword();">搜索</a>
+    </div>
     <section>
         <div class="category">
-            <h2><strong>随便看看&emsp;&emsp;</strong><small><a onclick="change_one();" style="color: #4b78e6">换一批</a></small></h2>
+            <h2><strong>随便看看&emsp;&emsp;</strong><small><a onclick="change_one();"
+                                                           style="color: #4b78e6">换一批</a></small></h2>
             {% for main in main_info %}
                 <div class="thumbnail">
                     <a href="/details?book_name={{ main["book_name"]|fileter_plus }}&book_writer={{ main["book_writer"]|fileter_plus }}&book_press={{ main["book_press"]|fileter_plus }}">
@@ -146,6 +151,14 @@
                 window.location.href = "https://www.baidu.com"
             }
         });
+    }
+
+    function search_keyword() {
+        //获取输入框内容
+        keyword = $("input:eq(0)").val().trim()
+        if (keyword != "") {
+            window.location.href = "/search/name?keyword=" + keyword
+        }
     }
 </script>
 </html>

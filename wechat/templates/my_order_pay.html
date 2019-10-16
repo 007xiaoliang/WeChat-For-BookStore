@@ -15,42 +15,50 @@
 <body>
 <header>
     <div class="headerbar">
-        <h1>我的订单</h1>
+        <h1>待付款</h1>
         <a class="navbar-toggle" onclick="history.go(-1)">
             <span class="icon-m_goback"></span>
         </a>
     </div>
 </header>
-
-<div class="describe cart">
-    <div class="shelves">
-        <div class="shop-title clearfix">
-            <span class="pull-left">运动鞋运动衫产品名称</span>
-            <span class="pull-right">2016-07-21</span>
-        </div>
-        <div class="media clearfix">
-            <div class="media-left">
-                <img src="http://fakeimg.pl/120x120/eee/fff/?text=LOGO"/>
+{% for order in order_list %}
+    <div class="describe cart">
+        <div class="shelves">
+            <div class="shop-title clearfix">
+                <span class="pull-left">{{ order["order_book"][0]["book_name"]|fileter_plus1 }}等</span>
+                <span class="pull-right">{{ order["order_code"]|filter_data }}</span>
             </div>
-            <div class="media-body media-order">
-                <p>订单编号：020202020291290</p>
-                <p>订单金额：￥2300.00</p>
-                <p>订单状态：<span class="red">待支付</span></p>
+            <div class="media clearfix">
+                <div class="media-left">
+                    <img src="{{ order["order_image"] }}"/>
+                </div>
+                <div class="media-body media-order">
+                    <p>订单编号：{{ order["order_code"] }}</p>
+                    <p>订单金额：￥{{ order["order_price"] }}</p>
+                    <p>订单状态：<span
+                            class="{{ order["order_status"]|filter_status1 }}">{{ order["order_status"]|filter_status }}</span>
+                    </p>
+                </div>
             </div>
-        </div>
-        <div class="clearfix">
-            <a class="pull-right btn btn-small" href="pay.html"> 去支付</a>
+            <div class="clearfix">
+                <a class="pull-right btn btn-white btn-small" onclick="delete_order(this, '{{ order["_id"] }}')">删除</a>
+                {% if order["order_status"]==0 %}
+                    <a class="pull-right btn btn-small"
+                       href="/pay?submit=False&order_code={{ order["order_code"] }}&message={{ order["order_message"] }}&address_info={{ order["order_address"]["_id"] }}&book_info={{ order["order_book"] }}">
+                        去支付</a>
+                {% elif order["order_status"]==2 %}
+                    <a class="pull-right btn btn-small" href="#">查看物流</a>
+                {% endif %}
+            </div>
         </div>
     </div>
-</div>
-
-
+{% endfor %}
 <footer>
     <div class="footheight"></div>
     <div class="row footbar">
         <a class="col-4 text-center" href="/index"><span class="icon-home"></span>首页</a>
         <a class="col-4 text-center" href="/cart"><span class="icon-cart2"></span>购物车</a>
-        <a class="col-4 text-center active"><span class="icon-user2"></span>我的</a>
+        <a class="col-4 text-center" href="/mine"><span class="icon-user2"></span>我的</a>
     </div>
 </footer>
 

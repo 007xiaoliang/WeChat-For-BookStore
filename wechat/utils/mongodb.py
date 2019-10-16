@@ -166,4 +166,4 @@ class Mongodb:
 
 
 if __name__ == '__main__':
-    print(Mongodb().delete_cart_one({"_id":"5da1e2fa91ed8bc750660bd5","openid": "oXjxxwiTZnOBGxNi2Z5PTMw0Pe5I"}))
+    print(Mongodb().count())

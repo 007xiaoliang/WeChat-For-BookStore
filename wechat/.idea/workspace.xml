@@ -1,27 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ac52d4e4-e7b3-43cc-b9c5-d3dfa9e6675d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/address_form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/pay.html" afterDir="false" />
+    <list default="true" id="ac52d4e4-e7b3-43cc-b9c5-d3dfa9e6675d" name="Default Changelist" comment="完善商城购物车，订单，地址等功能">
+      <change afterPath="$PROJECT_DIR$/utils/sendEmial.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../manage_web/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../manage_web/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../manage_web/utils/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/../manage_web/utils/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../manage_web/utils/redisUtils.py" beforeDir="false" afterPath="$PROJECT_DIR$/../manage_web/utils/redisUtils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bp/cart_bp.py" beforeDir="false" afterPath="$PROJECT_DIR$/bp/cart_bp.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bp/signature_bp.py" beforeDir="false" afterPath="$PROJECT_DIR$/bp/signature_bp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/application.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/application.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/jquery.mmenu.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/jquery.mmenu.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/sweetalert.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/sweetalert.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/address.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/address.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cart.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/details.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/details.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mine.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/mine.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/my_order.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/my_order.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/order.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/order.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/my_order_delivery.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/my_order_delivery.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/my_order_pay.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/my_order_pay.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pay.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pay.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/search.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/mongodb.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/mongodb.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/util.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -50,7 +45,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
@@ -97,6 +92,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="sendEmial" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="wechat" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils/sendEmial.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="wechat" type="Python.FlaskServer">
       <option name="flaskDebug" value="true" />
       <module name="wechat" />
@@ -116,7 +133,13 @@
     <list>
       <item itemvalue="Flask server.wechat" />
       <item itemvalue="Python.mongodb" />
+      <item itemvalue="Python.sendEmial" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.sendEmial" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -151,6 +174,12 @@
       <workItem from="1571030896109" duration="203000" />
       <workItem from="1571031137941" duration="281000" />
       <workItem from="1571031451572" duration="14620000" />
+      <workItem from="1571050443948" duration="95000" />
+      <workItem from="1571054000736" duration="57000" />
+      <workItem from="1571057868501" duration="1713000" />
+      <workItem from="1571061290160" duration="15000" />
+      <workItem from="1571120292758" duration="9792000" />
+      <workItem from="1571205612305" duration="618000" />
     </task>
     <task id="LOCAL-00001" summary="项目迁移至云服务器做的一次性提交">
       <created>1569943658022</created>
@@ -201,7 +230,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570774515513</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="完善商城购物车，订单，地址等功能">
+      <created>1571050505222</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1571050505222</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -225,14 +261,27 @@
     <MESSAGE value="公众号页面内容添加了搜索，下拉动态加载等功能" />
     <MESSAGE value="增加搜索并且动态加载功能" />
     <MESSAGE value="完善商城静态页面" />
-    <option name="LAST_COMMIT_MESSAGE" value="完善商城静态页面" />
+    <MESSAGE value="完善商城购物车，订单，地址等功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="完善商城购物车，订单，地址等功能" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/wechat$sendEmial.coverage" NAME="sendEmial Coverage Results" MODIFIED="1571129656165" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
     <SUITE FILE_PATH="coverage/wechat$diy_menu.coverage" NAME="diy_menu Coverage Results" MODIFIED="1569406956746" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
     <SUITE FILE_PATH="coverage/wechat$CreateSign.coverage" NAME="CreateSign Coverage Results" MODIFIED="1569400594211" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
     <SUITE FILE_PATH="coverage/wechat$util.coverage" NAME="util Coverage Results" MODIFIED="1570956465694" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
-    <SUITE FILE_PATH="coverage/wechat$mongodb.coverage" NAME="mongodb Coverage Results" MODIFIED="1570974833121" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
-    <SUITE FILE_PATH="coverage/wechat$wechat.coverage" NAME="wechat Coverage Results" MODIFIED="1571050179725" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/wechat$mongodb.coverage" NAME="mongodb Coverage Results" MODIFIED="1571058967550" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
+    <SUITE FILE_PATH="coverage/wechat$wechat.coverage" NAME="wechat Coverage Results" MODIFIED="1571129995446" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/wechat$demo.coverage" NAME="demo Coverage Results" MODIFIED="1570714210844" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bp" />
   </component>
 </project>

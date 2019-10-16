@@ -37,6 +37,9 @@ def fileter_name(li):
 def fileter_plus(li):
     return li.replace("+", "*******")
 
+def fileter_plus1(li):
+    return li.replace( "*******","+")
+
 
 def fileter_char(li):
     return li.replace("&lt;", "<").replace("&gt;", ">")
@@ -70,6 +73,7 @@ def filter_status1(li):
 
 app.add_template_filter(fileter_name)
 app.add_template_filter(fileter_plus)
+app.add_template_filter(fileter_plus1)
 app.add_template_filter(fileter_char)
 app.add_template_filter(filter_data)
 app.add_template_filter(filter_status)
@@ -135,6 +139,6 @@ def user_view():
             return redirect("http://www.baidu.com")
 
 
-# 内网穿透命令：1,sunny.exe --clientid=170302220842     2,d129dc91391dbb25
+# 内网穿透命令：1,sunny.exe --clientid=170302220842     2,d129dc91391dbb25    btphxlslrylwgaag
 if __name__ == '__main__':
     app.run()
