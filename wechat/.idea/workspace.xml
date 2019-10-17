@@ -1,22 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ac52d4e4-e7b3-43cc-b9c5-d3dfa9e6675d" name="Default Changelist" comment="完善商城购物车，订单，地址等功能">
-      <change afterPath="$PROJECT_DIR$/utils/sendEmial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../manage_web/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../manage_web/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../manage_web/utils/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/../manage_web/utils/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../manage_web/utils/redisUtils.py" beforeDir="false" afterPath="$PROJECT_DIR$/../manage_web/utils/redisUtils.py" afterDir="false" />
+    <list default="true" id="ac52d4e4-e7b3-43cc-b9c5-d3dfa9e6675d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bp/cart_bp.py" beforeDir="false" afterPath="$PROJECT_DIR$/bp/cart_bp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bp/signature_bp.py" beforeDir="false" afterPath="$PROJECT_DIR$/bp/signature_bp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/my_order.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/my_order.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/my_order_delivery.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/my_order_delivery.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/my_order_pay.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/my_order_pay.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pay.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pay.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/search.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/mongodb.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/mongodb.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -45,7 +31,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../manage_web" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
@@ -179,7 +165,7 @@
       <workItem from="1571057868501" duration="1713000" />
       <workItem from="1571061290160" duration="15000" />
       <workItem from="1571120292758" duration="9792000" />
-      <workItem from="1571205612305" duration="618000" />
+      <workItem from="1571205612305" duration="1830000" />
     </task>
     <task id="LOCAL-00001" summary="项目迁移至云服务器做的一次性提交">
       <created>1569943658022</created>
@@ -237,7 +223,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571050505222</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="有新订单下达时新增邮件发送功能">
+      <created>1571206274351</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1571206274351</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -262,7 +255,8 @@
     <MESSAGE value="增加搜索并且动态加载功能" />
     <MESSAGE value="完善商城静态页面" />
     <MESSAGE value="完善商城购物车，订单，地址等功能" />
-    <option name="LAST_COMMIT_MESSAGE" value="完善商城购物车，订单，地址等功能" />
+    <MESSAGE value="有新订单下达时新增邮件发送功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="有新订单下达时新增邮件发送功能" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

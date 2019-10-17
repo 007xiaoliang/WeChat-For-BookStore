@@ -2,11 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4452d276-2241-423a-99b4-b76b221602fc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/templates/sub_html/2_4.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/sub_html/2_4_1.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/redisUtils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/redisUtils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bp/bp2.py" beforeDir="false" afterPath="$PROJECT_DIR$/bp/bp2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bp/bp3.py" beforeDir="false" afterPath="$PROJECT_DIR$/bp/bp3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/sub_html/1_6.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/sub_html/1_6.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/mongodb.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/mongodb.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/pagination.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/util.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../wechat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../wechat/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../wechat/utils/mongodb.py" beforeDir="false" afterPath="$PROJECT_DIR$/../wechat/utils/mongodb.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -51,7 +56,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../wechat" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/sub_html" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -75,8 +80,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Flask server.manage_web">
-    <configuration name="dangRobot" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.mongodb">
+    <configuration name="mongodb" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="manage_web" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -89,29 +94,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils/dangRobot.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="redisUtils" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="manage_web" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils/redisUtils.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils/mongodb.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -137,10 +120,13 @@
       <option name="launchJavascriptDebuger" value="false" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Flask server.manage_web" />
+      <item itemvalue="Python.mongodb" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.redisUtils" />
-        <item itemvalue="Python.dangRobot" />
+        <item itemvalue="Python.mongodb" />
       </list>
     </recent_temporary>
   </component>
@@ -182,6 +168,8 @@
       <workItem from="1571054060602" duration="1967000" />
       <workItem from="1571061306650" duration="627000" />
       <workItem from="1571113076263" duration="1832000" />
+      <workItem from="1571207677602" duration="15517000" />
+      <workItem from="1571288450097" duration="11714000" />
     </task>
     <task id="LOCAL-00001" summary="添加manage_web项目中requirements.txt文件">
       <created>1569725223394</created>
@@ -259,8 +247,8 @@
     <SUITE FILE_PATH="coverage/manage_web$dangRobot.coverage" NAME="dangRobot Coverage Results" MODIFIED="1569855904460" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
     <SUITE FILE_PATH="coverage/manage_web$redisUtils.coverage" NAME="redisUtils Coverage Results" MODIFIED="1571054731093" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
     <SUITE FILE_PATH="coverage/manage_web$demo.coverage" NAME="demo Coverage Results" MODIFIED="1569136129137" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
-    <SUITE FILE_PATH="coverage/manage_web$manage_web.coverage" NAME="manage_web Coverage Results" MODIFIED="1571061344505" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/manage_web$manage_web.coverage" NAME="manage_web Coverage Results" MODIFIED="1571304010784" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/manage_web$connectionLinux.coverage" NAME="connectionLinux Coverage Results" MODIFIED="1569328344780" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
-    <SUITE FILE_PATH="coverage/manage_web$mongodb.coverage" NAME="mongodb Coverage Results" MODIFIED="1569595762504" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
+    <SUITE FILE_PATH="coverage/manage_web$mongodb.coverage" NAME="mongodb Coverage Results" MODIFIED="1571304290516" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
   </component>
 </project>

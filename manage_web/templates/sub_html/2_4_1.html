@@ -1,0 +1,126 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>更新订单状态</h2>
+        <ol class="breadcrumb">
+            <li class="active">
+                <strong>更改所选订单状态</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>只允许修改订单状态</h5>
+                </div>
+                <div class="ibox-content">
+                    <form id="form1" class="form-horizontal" enctype="multipart/form-data">
+                        <div class="form-group"><label class="col-sm-2 control-label">订单号</label>
+                            <div class="col-sm-10"><input type="text" class="form-control" name="order_code"
+                                                          readonly="readonly"></div>
+                        </div>
+                        <div class="form-group"><label class="col-sm-2 control-label">用户openid</label>
+                            <div class="col-sm-10"><input type="text" class="form-control" readonly="readonly"></div>
+                        </div>
+                        <div class="form-group"><label class="col-sm-2 control-label">订单地址</label>
+                            <div class="col-sm-10"><input type="text" class="form-control" readonly="readonly"></div>
+                        </div>
+                        <div class="form-group"><label class="col-sm-2 control-label">订单商品</label>
+                            <div class="col-sm-10"><input type="text" class="form-control" readonly="readonly"></div>
+                        </div>
+                        <div class="form-group"><label class="col-sm-2 control-label">订单价格</label>
+                            <div class="col-sm-10"><input type="text" class="form-control" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="form-group"><label class="col-sm-2 control-label">客户留言</label>
+                            <div class="col-sm-10"><input type="text" class="form-control" readonly="readonly"></div>
+                        </div>
+                        <div class="form-group"><label class="col-sm-2 control-label">订单状态</label>
+                            <div class="col-sm-10">
+                                <select class="form-control m-b" name="order_status">
+                                    <option value="0">未付款</option>
+                                    <option value="1">已付款</option>
+                                    <option value="2">未配送</option>
+                                    <option value="3">已完成</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-white" type="reset">重置</button>
+                                <button class="btn btn-primary" type="button" onclick="update()">修改</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        //加载要修改的书籍信息
+        load_book_info();
+    })
+
+    function update() {
+        var formData = new FormData($('#form1')[0]);
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "/update_order/",
+            data: formData,
+            processData: false,//用于对data参数进行序列化处理 这里必须false
+            contentType: false,
+            success: function (data) {
+                if (data["info"] == "ok") {
+                    swal({
+                        title: "提示",
+                        text: "更新成功"
+                    });
+                } else {
+                    swal({
+                        title: "提示",
+                        text: "更新失败，请稍后再试"
+                    });
+                }
+            },
+            error: function () {
+                swal({
+                    title: "提示",
+                    text: "服务器繁忙，请稍后再试"
+                });
+            }
+        });
+    }
+
+    function load_book_info() {
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "/load_update_order/",
+            success: function (data) {
+                if (data["info"] == "ok") {
+                    //渲染页面书籍信息
+                    const return_info = data["return_info"]
+                    $("input:eq(0)").val(return_info["order_code"])
+                    $("input:eq(1)").val(return_info["order_openid"])
+                    $("input:eq(2)").val(return_info["order_address"])
+                    $("input:eq(3)").val(return_info["order_book"])
+                    $("input:eq(4)").val(return_info["order_price"])
+                    $("input:eq(5)").val(return_info["order_message"])
+                    $("select:eq(0)").val(return_info["order_status"])
+                }
+            },
+            error: function () {
+                swal({
+                    title: "提示",
+                    text: "服务器繁忙，请稍后再试"
+                });
+            }
+        });
+    }
+</script>

@@ -3,11 +3,13 @@
 from bson import json_util
 from flask import Blueprint, request, jsonify, session
 
-from utils import mongodb, pagination, redisUtils, connectionLinux, saveImage, dangRobot
+from utils import mongodb, util, redisUtils, connectionLinux, saveImage, dangRobot
 from utils.config import SERVER_IP
 from utils.models import User, db, Permission, Role
 
 # 处理业务逻辑
+from utils.util import filter_status
+
 book_bp = Blueprint('book_blueprint', __name__)
 mdb = mongodb.Mongodb()  # mongodb连接
 reu = redisUtils.RedisClient()  # redis连接
@@ -61,7 +63,7 @@ def load_user_view():
                              "role_id": role.id}
                 user_list.append(room_dict)
             # 返回分页信息
-            page_info = pagination.pagina(les, entries, page_now)
+            page_info = util.pagina(les, entries, page_now)
             return jsonify({'info': "ok", 'server': SERVER_IP, 'return_info': user_list, "role_list": role_list,
                             "page_info": page_info})
     else:
@@ -141,7 +143,7 @@ def load_book_view():
                          }
             book_list.append(book_dict)
         # 返回分页信息
-        page_info = pagination.pagina(les, entries, page_now)
+        page_info = util.pagina(les, entries, page_now)
         return jsonify({'info': "ok", 'server': SERVER_IP, 'return_info': book_list, "page_info": page_info})
     else:
         return jsonify({'info': "no"})
@@ -320,9 +322,9 @@ def update_book_view():
 @book_bp.route("/load_update_book/", methods=['GET'])
 def load_update_book_view():
     # 从redis数据库拿到要更新的书籍
-    book_name = reu.search("book_name"+session['user']).decode("utf-8")
-    book_writer = reu.search("book_writer"+session['user']).decode("utf-8")
-    book_press = reu.search("book_press"+session['user']).decode("utf-8")
+    book_name = reu.search("book_name" + session['user']).decode("utf-8")
+    book_writer = reu.search("book_writer" + session['user']).decode("utf-8")
+    book_press = reu.search("book_press" + session['user']).decode("utf-8")
     # 根据书籍信息去mongodb查询
     book_info = json_util.dumps(
         mdb.search_one({"book_name": book_name, "book_writer": book_writer, "book_press": book_press}))
@@ -451,3 +453,71 @@ def search_dangdang_view():
     if int(id) is 2:
         mdb.insert_many(page_info)
     return jsonify({'info': "ok", "page_info": json_util.dumps(page_info)})
+
+
+# 订单管理
+@book_bp.route("/search/order", methods=['POST'])
+def search_order_view():
+    # 接受可能的参数
+    entries = request.values.get("entries")  # 每页显示条数
+    order_code = request.values.get("order_code")  # 查询具体用户名的权限信息
+    page_now = int(request.values.get("page_now"))  # 当前页面
+    order_status = int(request.values.get("order_status", default=""))  # 订单状态
+    if str(entries).isdigit() and str(page_now).isdigit() and int(entries) > 0 and int(page_now) > 0:
+        order_list = []
+        if order_code and order_code != '':
+            orders = mdb.search_orders({"order_code": order_code})
+            les = 1
+        else:
+            les = mdb.count_order(condition={"order_status": order_status})
+            orders = mdb.page_query_order(query_filter={"order_status": order_status}, page_size=int(entries),
+                                          page_now=int(page_now))
+        for order in orders:
+            address = order["order_address"]["a_name"] + " " + order["order_address"]["a_phone"] + " " + \
+                      order["order_address"]["a_postcode"] + " " + order["order_address"]["province"] + \
+                      order["order_address"]["city"] + order["order_address"]["district"] + \
+                      order["order_address"]["a_address"]
+            book = ""
+            for order_book in order["order_book"]:
+                book += order_book["book_name"] + "/" + order_book["book_writer"] + "/" + order_book[
+                    "book_press"]
+            status = filter_status(order["order_status"])
+            order_dict = {"order_code": order["order_code"], "order_openid": order["order_openid"],
+                          "order_address": address, "order_book": book, "order_status": status,
+                          "order_price": order["order_price"],
+                          "order_message": order["order_message"]}
+            order_list.append(order_dict)
+        # 返回分页信息
+        page_info = util.pagina(les, entries, page_now)
+        return jsonify({'info': "ok", 'return_info': order_list, "page_info": page_info})
+    else:
+        return jsonify({'info': "no"})
+
+
+# 加载要修改订单信息
+@book_bp.route("/load_update_order/", methods=['POST'])
+def load_order_view():
+    # 从redis缓存中拿到订单号
+    order_code = reu.search("order_codes" + session['user']).decode("utf-8")
+    # 根据order_code获取订单信息
+    order = mdb.search_order({"order_code": order_code})
+    address = order["order_address"]["a_name"] + " " + order["order_address"]["a_phone"] + " " + order["order_address"][
+        "a_postcode"] + " " + order["order_address"]["province"] + order["order_address"]["city"] + \
+              order["order_address"]["district"] + order["order_address"]["a_address"]
+    book = ""
+    for order_book in order["order_book"]:
+        book += order_book["book_name"] + "/" + order_book["book_writer"] + "/" + order_book["book_press"] + "|||"
+    order_dict = {"order_code": order["order_code"], "order_openid": order["order_openid"],
+                  "order_address": address, "order_book": book, "order_status": order["order_status"],
+                  "order_price": order["order_price"],
+                  "order_message": order["order_message"]}
+    return jsonify({'info': "ok", 'return_info': order_dict})
+
+
+# 修改订单
+@book_bp.route("/update_order/", methods=['POST'])
+def update_order_view():
+    order_code = request.form.get('order_code', default="")
+    order_status = request.form.get('order_status', default="")
+    mdb.update_order(condition={"order_code": order_code}, edit={"order_status": order_status})
+    return jsonify({'info': "ok"})

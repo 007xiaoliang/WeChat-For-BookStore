@@ -9,9 +9,14 @@ class Mongodb:
         self.conn = MongoClient(MONGOIP + ':' + MONGOPORT)
         self.db = self.conn.wechat  # 连接wechat数据库，没有则自动创建
         self.db.authenticate(MONGOUSER, MONGOPWD)
-        self.collection1 = self.db.book_set  # 书籍信息存储到book_set表中
-        self.collection2 = self.db.lunbo_set  # 轮播图存储到lunbo_set表中
-        self.collection3 = self.db.category_set  # 书籍分类信息存储到category_set表中
+        self.collection1 = self.db.book_set  # 操作book_set表
+        self.collection2 = self.db.lunbo_set  # 操作lunbo_set表】
+        self.collection3 = self.db.category_set  # 操作category_set表
+        self.collection4 = self.db.user_set  # 操作user_set表
+        self.collection5 = self.db.message_set  # 操作message_set表(留言表)
+        self.collection6 = self.db.cart_set  # 操作cart_set表(购物车表)
+        self.collection7 = self.db.address_set  # 操作address_set表(地址表)
+        self.collection8 = self.db.order_set  # 操作order_set表(订单表，分为(未付款/0，已付款/1，配送中/2，已完成/3)几种状态)
 
     # 插入数据 insert_many(items,ordered=False)
     def insert(self, content):
@@ -55,6 +60,11 @@ class Mongodb:
         count = self.collection1.count_documents({})
         return count
 
+    # 计数(order_set)
+    def count_order(self, condition):
+        count = self.collection8.count_documents(condition)
+        return count
+
     # 分页查询
     def page_query(self, query_filter=None, page_size=10, page_now=1):
         skip = page_size * (page_now - 1)
@@ -80,6 +90,27 @@ class Mongodb:
     def drop_category_set(self):
         self.collection3.drop()
 
+    # 查询所有(order_set)
+    def search_orders(self, condition):
+        return self.collection8.find(condition, {"_id": 0})
+
+    # 查询一条(order_set)
+    def search_order(self, condition):
+        return self.collection8.find_one(condition)
+
+    # 分页查询(order_set)
+    def page_query_order(self, query_filter=None, page_size=10, page_now=1):
+        skip = page_size * (page_now - 1)
+        return self.collection8.find(query_filter).limit(page_size).skip(skip)
+
+    # 更新order状态
+    def update_order(self, condition, edit):
+        self.collection8.update_one(condition, {'$set': edit})
+
     # 关闭连接
     def close(self):
         self.conn.close()
+
+
+if __name__ == '__main__':
+    print(Mongodb().search_order({"order_code":'201610151700422943994'}))
